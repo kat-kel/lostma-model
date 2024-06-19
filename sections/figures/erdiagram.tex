@@ -1,0 +1,81 @@
+\tikzstyle{s} = [rectangle, rounded corners, minimum width=2cm, text width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{tikzpicture}[-,shorten >=1pt,auto,node distance=1.5cm,semithick]
+\tikzstyle{every state}=[fill=red,draw=none,text=white]
+
+\pic [] { entityassociative = {{cycle}
+{\textbf{Cycle}}
+{
+  \textbf{Cycle} (is part of) \\
+}
+}};
+
+\pic [right = 10em of cycle] { entityassociative = {{work}
+{\textbf{Work}}
+{
+  \textbf{Cycle} FK \\
+}
+}};
+
+\pic [right = 10em of work] { entityassociative = {{text}
+{\textbf{Text}}
+{
+  \textbf{Work} FK \\
+  \textbf{Person} FK \\
+  \textbf{Text} (is modeled on, is translation of) \\
+}
+}};
+
+\pic [below = 6em of work] { entityassociative = {{witness}
+{\textbf{Witness}}
+{
+  \textbf{Text} FK \\
+  \textbf{Attested Document} FK \\
+  \textbf{Witness} (is preceded by) \\
+}
+}};
+
+\pic [left = 10em of witness] { entityassociative = {{pages}
+{\textbf{Pages}}
+{
+    \textbf{Witness} FK \\
+    \textbf{Archival Item} FK \\
+}
+}};
+
+\pic [below = 8em of text] { entityassociative = {{person}
+{\textbf{Person}}
+{
+}
+}};
+
+\pic [below = 5em of pages] { entityassociative = {{item}
+{\textbf{Archival Item}}
+{
+    \textbf{Repository} FK \\
+}
+}};
+
+\pic [right = 10em of item] { entityassociative = {{repo}
+{\textbf{Repository}}
+{
+}
+}};
+
+\pic [right = 10em of repo] { entityassociative = {{document}
+{\textbf{Attested Document}}
+{
+}
+}};
+
+\draw[one-omany] (cycle) -- node[above, pos=0.66]{is part of} (work);
+\draw[one-omany] (text) -- node[right, yshift=-0.1cm, pos=0.8]{is instance of} (witness);
+\draw[one-omany] (witness) -- node[above, pos=0.66]{contains} (pages);
+\draw[one-many] (work) -- node[above, pos=0.66]{is instance of} (text);
+\draw[omany-omany] (text) -- node[right, pos=0.25]{is translated by} (person);
+\draw[omany-omany] (text) -- node[right, pos=0.5]{is written by} (person);
+\draw[many-one] (pages) -- node[right, pos=0.25]{is contained in} (item);
+\draw[omany-one] (item) --node[above, pos=0.40]{is conserved in} (repo);
+\draw[omany-one] (witness) -- node[right, yshift=0.1cm, pos=0.15]{was contained in} (document);
+
+\end{tikzpicture}

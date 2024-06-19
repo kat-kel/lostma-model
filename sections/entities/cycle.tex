@@ -1,0 +1,30 @@
+\tikzstyle{s} = [rectangle, rounded corners, minimum width=2cm, text width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{tikzpicture}[-,shorten >=1pt,auto,node distance=1.5cm,semithick]
+\tikzstyle{every state}=[fill=red,draw=none,text=white]
+
+\pic [] { entityassociative = {{cycle}
+{\textbf{Cycle}}
+{
+  \textbf{ID} \\
+  \hline
+  title \\
+  is part of \\
+}
+}};
+
+\pic [right = 15em of cycle] { entityassociative = {{work}
+{\textbf{Work}}
+{
+  \textbf{ID} \\
+  \hline
+  title \\
+  is part of \\
+}
+}};
+
+
+\draw[one-many] (cycle.east) -- node[label, above]{Cycle has 1 or more} (work.west);
+\draw[one-many] (cycle.east) -- node[label, below]{Works that are part of it}(work.west);
+
+\end{tikzpicture}

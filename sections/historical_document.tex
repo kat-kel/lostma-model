@@ -1,0 +1,173 @@
+The \textit{Historical Document} is the physical object that contains all or part of a \textit{Witness} through passages delimited in the related entity \textit{Pages}. It is imperative to avoid duplicated entries of the same \textit{Historical Document}, which is why we have included multiple identification fields linking the \textit{Historical Document} record to a unique record in another database, such as the Arlima database, the Bibliothèque nationale de France, the Jonas database, the Philobiblon database, and the VIAF (Virtual International Authority File) database. We are aware that by allowing contributors to identify a \textit{Historical Document} by any one of multiple references, we risk having the same manuscript entered in the database twice, once using one reference and again using another. Through data record linking techniques and querying the set of refefences, we have a methodology to remove duplicates. Finally, having assembled a unified set of \textit{Historical Documents}, we will eventually improve the Biblissima+ database and other projects' reciliation of historical records.
+
+\subsubsection{Vocabularies}
+
+The only controlled vocabulary for \textit{Historical Document} is the \textbf{Scripta}, which indicates the place where the document was transcribed. The \textbf{Scripta} vocabulary controls the value entered in the data field \textit{location\_of\_creation}.\footnotemark\footnotetext{The use of this vocabulary to control the location of the document's creation seems incorrect to me. Indeed, I think we should create a \textit{script} data field and use the \textbf{Scripta} vocabulary to control it. I also think we should change the \textit{location\_of\_creation} data type to a free text field. The reason to control the location field is to perform aggregates and analyses on it, but (a) many \textit{Historical Documents} will not have location information and (b) preemptively controlling the kind of possible location information seems a task more difficult than it is valuable at the data entry stage.}
+
+    \begin{itemize}
+        \item Picardy
+        \item \brackettext{Needs development}
+    \end{itemize}
+
+\subsubsection{Attributes}
+
+\begin{longtable}{|
+    |m{0.15\textwidth}
+    |m{0.05\textwidth}
+    |p{0.15\textwidth}
+    |m{0.1\textwidth}
+    |m{0.2\textwidth}
+    |m{0.2\textwidth}
+||}
+    \hline
+    Attribute Name & Count & Data Type & Vocab. & Description & Semantic Reference \\
+    \hline
+
+    \multicolumn{6}{|c|}{Identification}\\
+    \hline
+    \textbf{repository\_id} %Field
+        & 1 %N
+        & \textbf{repository} (foreign key)%Type
+        & %Vocab
+        & \textit{The repository in which the historical document is currently or was last conserved.} %Description
+        & \texttt{repository}, \url{https://www.wikidata.org/wiki/Q2145117}%Semantic Reference
+        \\
+    \hline
+    \textbf{collection} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Name of the repository's collection which contains the historical document.} %Description
+        & \texttt{archival collection}, \url{https://www.wikidata.org/wiki/Q9388534}%Semantic Reference
+        \\
+    \hline
+    \textbf{shelfmark} %Field
+        & 1 %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Shelfmark of the historical document in the repository.} %Description
+        & \texttt{shelfmark}, \url{https://data.biblissima.fr/w/Property:P195} %Semantic Reference
+        \\
+    \hline
+    \textbf{note \_provenance} %Field
+        & \[\geq 0\] %N
+        & multi-line (text) %Type
+        & %Vocab
+        & \textit{Note(s) concerning traditions and/or prior shelfmarks of historical resources.} %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \multicolumn{6}{|c|}{Origin}\\
+    \hline
+    \textbf{location\_of \_creation} %Field
+        & \[\leq 1\] %N
+        & terms list (text)%Type
+        & \textbf{Scripta}%Vocab
+        & \textit{Place where the historical document was created.} %Description
+        & \texttt{location of creation}, \url{https://www.wikidata.org/wiki/Property:P1071}%Semantic Reference
+        \\
+    \hline
+    \textbf{creation\_date} %Field
+        & \[\leq 1\] %N
+        & date (list[date])%Type
+        & %Vocab
+        & \textit{The single or principal date of the resource's origin (may also include a range and/or fuzzy limits).} %Description
+        & \texttt{inception}, \url{https://data.biblissima.fr/w/Property:P58}%Semantic Reference
+        \\
+    \hline
+    \textbf{date\_freetext} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Date as it was stated in the reference.} %Description
+        & \texttt{stated as}, \url{https://data.biblissima.fr/w/Property:P93}%Semantic Reference
+        \\
+    \hline
+    \textbf{date\_source} %Field
+        & \[\leq 1\] %N
+        & single line (text, url)%Type
+        & %Vocab
+        & \textit{URL or citation of the reference from which the date was retrieved.} %Description
+        & \texttt{retrieved from}, \url{https://data.biblissima.fr/w/Property:P168}%Semantic Reference
+        \\
+    \hline
+    \multicolumn{6}{|c|}{Digitisation} \\
+    \hline
+    \textbf{iiif\_manifest} %Field
+        & \[\leq 1\] %N
+        & media file (link) %Type
+        & %Vocab
+        & \textit{IIIF manifest (JSON file) representing the digitisation of the resource.} %Description
+        & \texttt{IIIF manifest}, \url{https://data.biblissima.fr/w/Property:P196} %Semantic Reference
+        \\
+    \hline
+    \textbf{digitisation\_url} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Link to the resource's digitisation in a digital collection.} %Description
+        & \texttt{digitzed at URL}, \url{https://data.biblissima.fr/w/Property:P197} %Semantic Reference
+        \\
+    \hline
+    \multicolumn{6}{|c|}{References} \\
+    \hline
+    \textbf{arlima\_id} %Field
+        & \[\leq 1\] %N
+        & numeric (integer)%Type
+        & %Vocab
+        & \textit{Identifier in Arlima.} %Description
+        & \texttt{ARLIMA ID}, \url{https://data.biblissima.fr/w/Property:P121} %Semantic Reference
+        \\
+    \hline
+    \textbf{biblissima\_id} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Identifier in Biblissima+ database.} %Description
+        & \texttt{Biblissima ID}, \url{https://data.biblissima.fr/w/Property:P129} %Semantic Reference
+        \\
+    \hline
+    \textbf{bnf\_id} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Archival Resource Key from the Bibliothèque nationale de France.} %Description
+        & \texttt{BnF ID}, \url{https://data.biblissima.fr/w/Property:P109}
+        \\
+    \hline
+    \textbf{jonas\_id} %Field
+        & \[\leq 1\] %N
+        & numeric (integer)%Type
+        & %Vocab
+        & \textit{Identifier in Jonas.} %Description
+        & \texttt{Jonas ID}, \url{https://data.biblissima.fr/w/Property:P140} %Semantic Reference
+        \\
+    \hline
+    \textbf{philobiblon\_id} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Identifier in Philobiblon.} %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{viaf\_id} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Identifier for the Virtual International Authority File database (VIAF).} %Description
+        & \texttt{VIAF ID}, \url{https://data.biblissima.fr/w/Property:P113}%Semantic Reference
+        \\
+    \hline
+    \textbf{note\_reference} %Field
+        & \[\geq 0\] %N
+        & multi-line (text)%Type
+        & %Vocab
+        & \textit{Note(s) concerning how to identify the entity in an external reference or database.} %Description
+        & %Semantic Reference
+        \\
+    \hline
+
+\caption{Proposed Historical Document Attributes} % needs to go inside longtable environment
+\label{tab:proposedHistoricalDocumentAttributes}
+\end{longtable}

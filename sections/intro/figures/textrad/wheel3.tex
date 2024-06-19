@@ -1,0 +1,42 @@
+    
+\tikzstyle{s} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=white]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{center}
+\begin{tikzpicture}[-,shorten >=1pt,auto,node distance=2.8cm,semithick]
+\tikzstyle{every state}=[fill=red,draw=none,text=white]
+    \node[s] (D) {Document (\textbf{D})};
+    \node[s] (I) [above right of=D, xshift=5em, yshift=5em] {Ideal Content (\textbf{I})};
+    \node[s] (S) [below right of=I, xshift=5em, yshift=-5em] {Linguistic Content (\textbf{S})};
+
+    \begin{pgfonlayer}{bg}    % select the background layer
+        \draw [arrow] (S) -> (D);
+        \draw [arrow] (D) -> (I);
+        \draw [arrow] (I) -> (S);
+    \end{pgfonlayer}
+
+    \node[s] (W) [above left of=S] {Work (\textbf{W})};
+    \node[s] (Z) [left of=W, xshift=-2.5em] {Signs (\textbf{Z})};
+    \node[s] (F) [below right of=Z] {Version (\textbf{F})};
+
+    % Duval notes
+    \node (Sn) [below=1cm,xshift=3cm,text width=6cm] at (S)
+    {
+    \textbf{Work}: ``The author's text, eventually the text corresponding to the author's intention, and implies authenticity.''
+    };
+    \node (Fn) [below=1cm,text width=5cm] at (F)
+    {
+    \textbf{Text}: ``The linguistic sequence, which is attested in the document that is transmitting the work.''
+    };
+    \node (Dn) [below=1cm,xshift=-2cm,text width=4cm] at (D)
+    {
+    \textbf{Document}: ``A physical manifestation of a text.''
+    };
+
+    \draw [arrow] (Sn) -> (Fn);
+    \draw [dashed, -] (Sn) -- (S);
+    \draw [arrow] (Fn) -> (Dn);
+    \draw [dashed, -] (Fn) -- (F);
+    \draw [dashed, -] (Dn) -- (D);
+
+\end{tikzpicture}
+\end{center}

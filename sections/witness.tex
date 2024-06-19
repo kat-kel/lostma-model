@@ -1,0 +1,79 @@
+The \textit{Witness} is a realized instance of someone's text (\textit{Text}). Frédéric Duval, what we call the \textit{Witness} is a ``the linguistic sequence, which is attested in the document transmitting the work.''\footcite[``la séquence linguistique attestée dans un document transmettant l'oeuvre.''][16]{Duval2017} 
+
+
+and what he calls a \textit{Fassung} (Version) is ``a specific sequence of characters''\footcite[``einen Bestand an Schriftzeichen.''][47]{Sahle2013} 
+
+\subsubsection{Vocabularies}
+
+
+
+\subsubsection{status\_wit}
+\begin{itemize}
+    \item citation
+    \item complete
+    \item fragment
+    \item translation or rewriting
+\end{itemize}
+
+\subsubsection{Attributes}
+
+\begin{longtable}{|
+    |m{0.15\textwidth}
+    |m{0.05\textwidth}
+    |p{0.15\textwidth}
+    |m{0.1\textwidth}
+    |m{0.2\textwidth}
+    |m{0.2\textwidth}
+||}
+    \hline
+    Attribute Name & Count & Data Type & Vocab. & Description & Semantic Reference \\
+    \hline
+
+    \multicolumn{6}{|c|}{Relations}\\
+    \hline
+    \textbf{text\_id} %Field
+        & 1 %N
+        & \textbf{text} (foreign key)%Type
+        & %Vocab
+        & \textit{Reference to the text to which it is a witness.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \multicolumn{6}{|c|}{General Information}\\
+    \hline
+    \textbf{siglum} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Philological identifier of the witness.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{siglum\_ref} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Reference in which the siglum is used.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{status} %Field
+        & 1 %N
+        & terms list (text)%Type
+        & \textbf{status\_wit}%Vocab
+        & \textit{Status of the witness.}%Description
+        & \texttt{condition}, \url{https://www.wikidata.org/wiki/Q813912}%Semantic Reference
+        \\
+    \hline
+    \textbf{tei\_document} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Reference pointing to the TEI document that depicts the witness's text.}%Description
+        & \texttt{TEI/XML}, \url{https://www.wikidata.org/wiki/Q124622467}%Semantic Reference
+        \\
+    \hline
+
+\caption{Proposed Witness Attributes} % needs to go inside longtable environment
+\label{tab:proposedWitnessAttributes}
+\end{longtable}

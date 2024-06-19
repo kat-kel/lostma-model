@@ -1,0 +1,95 @@
+The \textit{Repository} is the archival institution in which a \textit{Historical Document} is conserved. It denotes the modern institution currently holding an extant document. Every \textit{Historical Document} must have a singular relationship to a \textit{Repository}. However, as is often the case, a single \textit{Repository} can be related to multiple \textit{Historical Documents}.
+
+\subsubsection{Vocabularies}
+
+The \textit{Repository} entity has only one controlled vocabulary, which is the modern-day name of the country in which the institution currently resides. This vocabulary is developed from the default list of countries in a Heurist database, augmented with the names of several missing countries, including England and Wales.
+
+\subsubsection{Attributes}
+
+\begin{longtable}{|
+    |m{0.15\textwidth}
+    |m{0.05\textwidth}
+    |p{0.15\textwidth}
+    |m{0.1\textwidth}
+    |m{0.2\textwidth}
+    |m{0.2\textwidth}
+||}
+    \hline
+    Attribute Name & Count & Data Type & Vocab. & Description & Semantic Reference \\
+    \hline
+
+    \multicolumn{6}{|c|}{General Info}\\
+    \hline
+    \textbf{Site Name} %Field
+        & 1 %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{The Name of the Site.} %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{Street Address} %Field
+        & \[\leq 1\] %N
+        & multi-line (text)%Type
+        & %Vocab
+        & \textit{Street address as recorded in Archives Portal Europe.} %Description
+        & \texttt{street address}, \url{https://www.wikidata.org/wiki/Q24574749}%Semantic Reference
+        \\
+    \hline
+    \textbf{Website} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Website of the archival institution according to Archives Portal Europe..} %Description
+        & \texttt{official website}, \url{https://www.wikidata.org/wiki/Q22137024}%Semantic Reference
+        \\
+    \hline
+
+    \multicolumn{6}{|c|}{Identification}\\
+    \hline
+    \textbf{Archives Portal Europe Reference} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{URL to archival institution's information on Archives Portal Europe.} %Description
+        & %Semantic Reference
+        \\
+    \hline
+
+    \multicolumn{6}{|c|}{Country}\\
+    \hline
+    \textbf{Country} %Field
+        & \[\leq 1\] %N
+        & terms list (text)%Type
+        & \textbf{Country}%Vocab
+        & \textit{Modern-day country in which the repository resides.} %Description
+        & \texttt{country}, \url{https://www.wikidata.org/wiki/Property:P17}%Semantic Reference
+        \\
+    \hline
+    \textbf{WikiData ID} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{WikiData unique identifier.} %Description
+        & \texttt{Wikidata Q identifier}, \url{https://www.wikidata.org/wiki/Q43649390}%Semantic Reference
+        \\
+    \hline
+    \textbf{GeoNames ID} %Field
+        & \[\leq 1\] %N
+        & numeric (integer)%Type
+        & %Vocab
+        & \textit{The ID of the place in GeoNames. Info is then available at \url{http://www.geonames.org/<geonameID>}} %Description
+        & \texttt{GoeNames}, \url{https://www.wikidata.org/wiki/Q830106}%Semantic Reference
+        \\
+    \hline
+    \textbf{GeoShape Map} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{GeoShape map file from WikiData.} %Description
+        & \texttt{geoshape}, \url{https://www.wikidata.org/wiki/Property:P3896}%Semantic Reference
+        \\
+    \hline
+\caption{Proposed Repository Attributes} % needs to go inside longtable environment
+\label{tab:proposedRepositoryAttributes}
+\end{longtable}

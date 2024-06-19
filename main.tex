@@ -1,0 +1,157 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+
+% \usepackage{enumitem}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage{multicol}
+\usepackage{marginnote}
+
+% color row
+\usepackage[table, svgnames, dvipsnames]{xcolor}
+\usepackage{makecell, cellspace, caption}
+
+% \usepackage{geometry}
+% \geometry{margin=1in}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{er-diagram}
+\usepackage{smartdiagram}
+\usepackage{circuitikz}
+\usetikzlibrary{calc,shapes.geometric,positioning,arrows,mindmap}
+\pgfdeclarelayer{bg}    % declare background layer
+\pgfsetlayers{bg,main}
+
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+
+%Multiple authors
+\usepackage{authblk}
+%ENC biblio style
+\usepackage[backend=biber, style=verbose%
+% authoryear-comp, mergedate=compact,
+, hyperref=true, uniquename=init, giveninits=true]{biblatex}
+\addbibresource{bibliography.bib}
+
+%\DeclareNameWrapperFormat{sortname}{\mkbibbold{#1}}
+ 
+%for multiple graphics related
+\usepackage{subcaption}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\usepackage{csquotes}
+
+\title{Modeling Medieval Romances}
+
+\author{Kelly Christensen}
+\affil{École nationale des chartes, 65 Rue de Richelieu, 75002 Paris, \texttt{kelly.christensen@chartes.psl.eu}}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% The biggest barriers to understanding how societies engaged with legends and histories in the Middle Ages are the unexplained gaps in the evidence. Through the creation and exchange of manuscripts, people developed and shared knights' tales across languages and generations. Manuscripts provide the primary evidence for this cultural transmission. However, looking at only extant manuscripts cannot reveal how many lost manuscripts are missing from the archive. This epistemic blindspot impedes scholars from fully visualizing how stories and textual traditions evolved through the centuries.
+
+% The LostMa project seeks to leverage the gaps in the evidence in order to overcome some of them. Our hypothesis is that we can emulate the process of textual transmission through stochastic birth-and-death processes with multi-agent simulations. Such an artificial intelligence model requires as much accurate information as possible in order to optimize its predictions. Therefore, one of the project's secondary objectives, which will be of use to many other projects with their own primary objectives, is to assemble a massive corpus of chivalric literature. In focusing on textual traditions, rather than documents, our corpus includes extant manuscripts and fragments, whose text we can analyze, as well as missing documents, which we know or presume existed based on stemmata and other scholarly work.
+
+This document explains and justifies the architecture of a data model whose objective is to help build knowledge about traditions of chivalric literature in the Middle Ages. The building blocks of this knowledge are Medieval works and their expressions in various text versions, as well as both extant and missing inscriptions of those versions on physical objects, including manuscripts and fragments. By structuring this information in a relational framework, linking abstract textual traditions and concrete archival evidence, the data model aims to let users curate large-scale collections of information from a diverse corpus, including Medieval French, Middle Dutch, and Old Norse.
+
+The model needs to be able to execute the following user tasks:
+
+\begin{itemize}
+    \item Return a collection of resources (manuscripts, works, etc.) according to search criteria.
+    \begin{enumerate}
+        \item Ex. All the manuscripts that contain at least one witness of David Aubert's 1462 prosified version of \textit{Renaut de Montauban}. \textrightarrow [\textbf{Doc}\textsubscript{1}, \textbf{Doc}\textsubscript{2}, ... \textbf{Doc}\textsubscript{i}]
+        \item Ex. All works that are grouped within the cycle about the knight Renaut de Montauban. \textrightarrow [\textbf{Work}\textsubscript{1}, \textbf{Work}\textsubscript{2}, ... \textbf{Work}\textsubscript{i}]
+    \end{enumerate}
+    \item Return a single resource according to search criteria.
+    \begin{enumerate}
+        \item Ex. The five-volume witness of David Aubert's version of \textit{Renaut de Montauban} that is partly conserved in Paris and partly in Munich. \textrightarrow [\textbf{Work}\textsubscript{x}]
+        \item Ex. The earliest known version of the work \textit{Renaut de Montauban}. \textrightarrow [\textbf{Text}\textsubscript{y}]
+    \end{enumerate}
+    \item Return a tree of all the ancestors, descendents, and/or neighbors linked to a single resource or a collection of resources based on search criteria.
+    \begin{enumerate}
+        \item Ex. All the witnesses of David Aubert's version of \textit{Renaut de Montauban}, along with all the witnesses' page ranges as well as the bibliographic references to the physical documents that contain those pages. \textrightarrow \brackettext{
+            \brackettext{\textbf{Wit}\textsubscript{1}, \brackettext{
+                \textbf{Pag}\textsubscript{a}, \textbf{Doc}\textsubscript{a}
+            }},
+            \brackettext{\textbf{Wit}\textsubscript{2}, 
+                \brackettext{
+                    \textbf{Pag}\textsubscript{b}, \textbf{Doc}\textsubscript{b}
+                },
+                \brackettext{
+                    \textbf{Pag}\textsubscript{c}, \textbf{Doc}\textsubscript{c}
+                }
+            },
+            \ldots
+        }
+    \end{enumerate}
+\end{itemize}
+
+\section{Precedent Models}
+\input{sections/intro.tex}
+
+\section{Precedent Models' Limitations}
+\input{sections/limitations.tex}
+
+\section{Our Model}
+\input{sections/our-model.tex}
+
+% \subsubsection{Relational Database Framework}
+% \input{sections/intro/er-diagram.tex}
+
+% \section{Entities}
+
+% \subsection{Repository}
+% \input{sections/repository.tex}
+
+% \subsection{Historical Document}
+% \input{sections/historical_document.tex}
+
+% \subsection{Pages}
+% \input{sections/pages.tex}
+
+% \subsection{Witness}
+% \input{sections/witness.tex}
+
+% \subsection{Text}
+% \input{sections/text.tex}
+
+% \section{Added}
+
+% \begin{longtable}{|
+%     |m{0.15\textwidth}
+%     |m{0.05\textwidth}
+%     |m{0.1\textwidth}
+%     |m{0.1\textwidth}
+%     |m{0.2\textwidth}
+%     |m{0.3\textwidth}
+% ||}
+%     \hline
+%     Attribute Name & Count & Data Type & Vocab. & Description & Semantic Reference \\
+%     \hline
+
+%     \multicolumn{6}{|c|}{Relations}\\
+%     \hline
+%     \textbf{note\_id} %Field
+%         & \[\geq 0\] %N
+%         & %Type
+%         & %Vocab
+%         & %Description
+%         & %Semantic Reference
+%         \\
+%     \hline
+
+% \caption{Proposed Attributes} % needs to go inside longtable environment
+% \label{tab:proposedAttributes}
+% \end{longtable}
+
+\end{document}

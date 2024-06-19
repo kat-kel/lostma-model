@@ -1,0 +1,45 @@
+\tikzstyle{s} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{tikzpicture}[-,shorten >=1pt,auto,node distance=2.8cm,semithick]
+\tikzstyle{every state}=[fill=red,draw=none,text=white]
+
+    \node[s] (textAspremont) {Aspremont};
+    \node[s] (textOtinel) [right of=textAspremont, xshift=5cm] {Otinel};
+    \node [left=6cm, text width=3cm, xshift=1cm] at (textAspremont) {Text};
+
+    \node[s] (witAspremont) [below of=textAspremont] {P\textsubscript{4} / C};
+    \node[s] (witOtinel) [below of=textOtinel] {M};
+    \node [left=6cm, text width=3cm, xshift=1cm] at (witAspremont) {Witness};
+
+    \node[s] (pagesOtinel) [below of=witOtinel] {fol. 7r-7v, part II};
+    \node[s] (pagesAspremont1) [below of=witAspremont, xshift=2cm] {fol. 8r-8v, part II};
+    \node[s] (pagesAspremont2) [below of=witAspremont, xshift=-2cm] {fol. 1r-2a};
+    \node [left=4cm, text width=3cm, xshift=1cm] at (pagesAspremont2) {Pages};
+
+    \node[s] (cdoc1) [below of=pagesOtinel] {Paris, BnF, NAF 5094};
+    \node[s] (cdoc2) [below of=pagesAspremont2, xshift=-0.5cm] {Clermont-Ferrand, Arch. Dép., I F2};
+    \node [left=3.5cm, text width=3cm, xshift=1cm] at (cdoc2) {Contemporary Document};
+
+    \node[s] (hdoc) [below of=cdoc2, xshift=5cm] {Clermont-Ferrand, I F2 + (?) Paris, BnF, NAF 5094, part II};
+    \node [left=7.5cm, text width=4cm, xshift=1cm] at (hdoc) {Historical Document};
+
+    \path[every node/.style={font=\sffamily\small}]
+    (textAspremont) edge node [right] {} (witAspremont)
+    (witAspremont) edge node [right] {} (pagesAspremont1)
+    (witAspremont) edge node [right] {} (pagesAspremont2)
+    (pagesAspremont1) edge node [right] {} (cdoc1)
+    (pagesAspremont2) edge node [right] {} (cdoc2)
+    ;
+
+    \path[every node/.style={font=\sffamily\small}]
+    (witAspremont) edge[bend right=20] node [left] {} (hdoc)
+    (witOtinel) edge node [left] {} (hdoc)
+    ;
+
+    \path[every node/.style={font=\sffamily\small}]
+    (textOtinel) edge node [right] {} (witOtinel)
+    (witOtinel) edge node [right] {} (pagesOtinel)
+    (pagesOtinel) edge node [right] {} (cdoc1)
+    ;
+
+\end{tikzpicture}

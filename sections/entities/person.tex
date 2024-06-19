@@ -1,0 +1,46 @@
+\tikzstyle{s} = [rectangle, rounded corners, minimum width=2cm, text width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{tikzpicture}[-,shorten >=1pt,auto,node distance=1.5cm,semithick]
+\tikzstyle{every state}=[fill=red,draw=none,text=white]
+
+\pic [] { entityassociative = {{text}
+{\textbf{Text}}
+{
+  \textbf{ID} \\
+  \hline
+  is expression of \\
+  is modeled on \\
+  title \\
+  person creator \\
+  person translator \\
+  creation date \\
+  creation date text \\
+  creation date cite \\
+  matter \\
+  regional genre\\
+  language\\
+  form\\
+  poetic meter\\
+  stanza length \\
+  verse length \\
+  rhyme perfection\\
+}
+}};
+
+
+\pic [right = 12em of text] { entityassociative = {{person}
+{\textbf{Person}}
+{
+  \textbf{ID} \\
+  \hline
+  name \\
+  birth year \\
+  death year \\
+  location
+}
+}};
+
+\draw[omany-omany] (text) -- node[label, above]{Person wrote/translated} (person);
+\draw[omany-omany] (text) -- node[label, below]{0 or many Texts} (person);
+
+\end{tikzpicture}

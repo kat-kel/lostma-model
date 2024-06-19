@@ -1,0 +1,42 @@
+\tikzstyle{s} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=white]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{center}
+\begin{tikzpicture}[-,shorten >=1pt,auto,node distance=2.8cm,semithick]
+\tikzstyle{every state}=[fill=red,draw=none,text=white]
+\node[s] (D) {Document (\textbf{D})};
+\node[s] (I) [above right of=D, xshift=5em, yshift=5em] {Ideal Content (\textbf{I})};
+\node[s] (S) [below right of=I, xshift=5em, yshift=-5em] {Linguistic Content (\textbf{S})};
+
+\begin{pgfonlayer}{bg}    % select the background layer
+    \draw [arrow] (S) -> (D);
+    \draw [arrow] (D) -> (I);
+    \draw [arrow] (I) -> (S);
+\end{pgfonlayer}
+
+\node[s] (W) [above left of=S] {Work (\textbf{W})};
+\node[s] (Z) [left of=W, xshift=-2.5em] {Signs (\textbf{Z})};
+\node[s] (F) [below right of=Z] {Version (\textbf{F})};
+
+\node [below=1cm,xshift=2cm,text width=6cm] at (S)
+{
+Ex. The structured content of \textit{Beowulf} as mediated through the human language Old English, and to which an author or authors can be attributed.
+};
+\node [below=1cm,text width=4.5cm] at (F)
+{
+Ex. The sequence of letters that represents the linguistic content of \textit{Beowulf} in Old English.
+};
+\node [below=1cm,xshift=-1cm,text width=5cm] at (D)
+{
+Ex. A manuscript containing the Old-English version of \textit{Beowulf} (Nowell Codex).
+};structued
+\node [right=1cm,xshift=1cm,text width=5cm] at (W)
+{
+Ex. An organized structuring of the content in \textit{Beowulf}.
+};
+\node [right=1cm,xshift=1cm,text width=5cm] at (I)
+{
+Ex. Abstractly, the content of the story \textit{Beowulf}.
+};
+
+\end{tikzpicture}
+\end{center}

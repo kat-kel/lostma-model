@@ -1,0 +1,135 @@
+To stress test the FRBR and \textit{Textrad}, neither of which were specially designed for Medieval literature, we explore two cases. The first is a work about the knight Renaut de Montauban. In the 1460s, the work was recomposed in a multi-volume manuscript, which introduces some complexity in relating a text version (\textit{Fassung}) to multiple documents. Second, we underscore the challenge of relating text versions to physical documents through the case of a lost manuscript, which, before being dismembered, allegedly transmitted a version of the \textit{Chanson d'Otinel} and a version of the \textit{Chanson d'Aspremont}. Parts of both are conserved today in two different nineteenth-century collections of Medieval fragments. Through the data model, we want to be able to recognize what scholars argue, which is that the fragments were once transmitted together in a now lost manuscript.
+
+\subsection{\textit{Renaut de Montauban} and multi-volume witnesses}
+
+Let us start with the easier case, concerning a work about the legendary knight Renaut de Montauban. Sahle's \textit{Werke} concept is helpful here in that it defines a work as the ordering of a story's abstract content (\textit{Inhalt}) into a narrative structure. The sequence of events whose order defines the \textit{Work} \textit{Renaut de Montauban} begins with a backstory that contextualizes the main conflict.\footcite[Whether this opening section constitutes a prologue, in alignment with the generic expectations of a prologue for \textit{chansons de geste}, is the subject of scholarly debate.][]{Leverage2000} The narrator explains that four brothers, Aymon, Beuves, Girart, and Doon, once fought together against the emperor Charlemagne. Beuves, who is duke of Aigremont and vassal of Charlemagne, refused some of the duties the emperor had imposed, which provokes the latter's fury. The brothers ccame to Beuves's aid and joined his conflict with Charlemagne. \textit{Renaut de Montauban} begins with this history because the work's main storyline focuses on how a new generation of brothers, Aymon's sons Renaut, Alard, Guichard, and Richard, again push back against Charlemagne and how the powerful emperor pursues revenge.\footnotemark\footnotetext{Having made peace, duke Aymon brings his four sons, Renaut, Alard, Guichard, et Richard, with him to meet emperor Charlemagne in Paris. After the meeting, Renaut plays chess with Charlemagne's nephew, but the game devolves into a dispute. The knight ultimately slays the nephew. Fearing the emperor's vengeful wrath, Renaut and his brothers flee Paris on the back of a magical horse, Bayard. Adventures ensue.}
+
+In various languages and forms, many people have composed and recomposed the \textit{Work} known by its French title as \textit{Renaut de Montauban}. The earliest instance of such a composition, what Sahle calls the text-as-linguistic-content \brackettext{\textit{sprachlichen Gehalt}} and the FRBR call an \textit{Expression} of the \textit{Work}, dates from the end of the twelfth century and was expressed in French alexandrine verse. Following the argument Duval makes to rely on famililar terminology, but with greater attention to precise definitions, we use the term \textit{Text} to refer to the idea of the articulation of a \textit{Work} in some language and form, Sahle's text-as-linguistic-content.
+
+Our test case concerns a \textit{Text} of \textit{Renaut de Montauban} that was written down about three centuries after the first known \textit{Text} was inscribed. While working for the Burgundian duke Philippe le Bon between 1459 and 1465, David Aubert adapted \textit{Renaut de Montauban} into contemporary prose. He structured his text's linguistic content inside evenly distributed chapters, each about 8 to 12 leaves long, and in five manuscript volumes. Each volume was about the same length, between 350 to 399 leaves, and featured nearly the same number of illuminations, between 47 and 53.\footcite[][]{Querel2007} Copies of those volumes exist in Paris and Munich; the first four are in the Bibliothèque nationale de France and the fifth volume is in the Bayerische Staatsbibliothek. Crucially, in the terminology of the \textit{Textrad}, this particular \textit{Version} (\brackettext{Fassung}) of Aubert's \textit{Text} was intentionally produced in five physical documents; it does not exist today in five manuscripts because of some process of deconstruction after its production.
+
+Both the FRBR and Sahle's \textit{Textrad} are capable of modeling some of what we have described thus far. As Table \ref{tab:Renaut} demonstrates, both the FRBR and Sahle find that the term \textit{Work} appropriately describes the ordered series of episodes that define Renaut's story or revolt. We also use the term \textit{Work}. Regarding instances of the \textit{Work}, the FRBR and Sahle each prefer terms that point to a comparable idea of human language, \textit{Expression} and \textit{Sprache}, respectively. In our test case, this concept maps to the French-language content that is Aubert's version of the \textit{Work}. However, agin in line with Duval, we hold that the term \textit{Text} is better suited to indicate Aubert's specific telling, articulated in a specific human language and literary style, of the \textit{Work}. Finally, the text version or \textit{Fassung}, as Sahle puts it, is what we and many scholars of Medieval literature call a \textit{Witness} to the \textit{Text} that someone composed. In addition to adopting the term \textit{Text}, as Duval encourages, we also borrow the word \textit{Witness}, which is common in codicology, philology, and Medieval studies.
+
+\begin{table}[ht]
+    \begin{center}
+    \begin{tabular}{|p{0.44\textwidth}|p{0.12\textwidth}|p{0.21\textwidth}|p{0.1\textwidth}|}
+        \hline
+        \textbf{Aspect} & \textbf{FRBR} & \textbf{\textit{Textrad}} & \textbf{LostMa} \\ \hline
+        The subject matter of \textit{Renaut de Montauban}. & NA & text-as-content \newline (\textit{Inhalt}, \textbf{I}) & NA \\ \hline
+        The ordered series of episodes about Renaut's revolt, starting with the backstory of the older generation. & \textit{Work} & text-as-work \newline (\textit{Werke}, \textbf{W}) & \textit{Work} \\ \hline
+        David Aubert's prosified French-language version. & \textit{Expression} & text-as-linguistic-content \newline (\textit{Sprache}, \textbf{S}) & \textit{Text} \\ \hline
+        A five-volume copy of the prose version. & \textit{Manifestation} & text-as-version \newline (\textit{Fassung}, \textbf{F}) & \textit{Witness} \\ \hline
+    \end{tabular}
+    \end{center}
+\caption{FRBR and \textit{Textrad} modeling \textit{Renaut de Montauban}.}
+\label{tab:Renaut}
+\end{table}
+
+\subsubsection{\textit{Text} v. \textit{Witness}}
+
+What is the difference between the \textit{Text} and the \textit{Witness}, or the text-as-linguistic-content and the text-as-version, as Sahle puts it? The former is indifferent to versions of spelling and formatting, much in the way the \textit{Work} is indifferent to language and form. By transcribing here the first line of Aubert's \textit{Text}, we would either be choosing which \textit{Witness} to copy, as is the case with critical editions, or creating our own text version. Variations at the minute level of linguistic expression and dialect distinguish one text-as-version (\textit{Witness}) from another. For example, the second volume of two different multi-volume \textit{Witnesses} of Aubert's \textit{Text} each present the same linguistic content, as seen in Tabel \ref{tab:TextVersions}, but each one has its own way of transforming linguistic content into written language.
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{tabular}{|p{0.2\textwidth}|p{0.7\textwidth}|}
+            \hline
+            Manuscript shelfmark & First line \\
+            \hline \hline
+            BNF Arsenal 5073 & Qui a veu l'istoire de Maugis d'Aigremont poeut avoir leu comment Vivien. \\
+            \hline
+            BNF français 19174 & Qui a veue l'istoire de Maugis d'Aigremont bien au long, peult avoir veu comment Vivien.\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{First lines of the second volume of two \textit{Witnesses} to Aubert's \textit{Text}, \textit{Renaut de Montauban}.}
+\label{tab:TextVersions}
+\end{table}
+
+\noindent Both transcribed sequences of characters in Table \ref{tab:TextVersions} are each part of a different text-as-version or \textit{Witness}, both of which are part of the same text-as-linguistic-content or \textit{Text}, in this case, Aubert's \textit{Renaut de Montauban}.
+
+\subsubsection{\textit{Cycle}}
+
+Neither the FRBR nor the \textit{Textrad} have a concept well suited for describing a group of related \textit{Works}. Both models' ontological categories reach only to the extent of a single \textit{Work}. Yet when treating similar content, such as the adventures of Renaut de Montauban and his family, sometimes \textit{Works} of chivalric literature cohere into a collection known as a \textit{Cycle}. While the earliest instance of \textit{Renaut de Montauban} appeared in the twelfth century, other \textit{Works} were created in the centuries that followed, which revisited characters central in \textit{Renaut de Montauban}. As Gaëtan Augustine notes in his dissertation, the later \textit{Works} do not all return to the core \textit{Work's} central themes, namely revolt and imperial tyranny, but they neverthless form a \textit{Cycle} by building a world around figures central to the \textit{Work} \textit{Renaut de Montauban}.\footcite[][]{Augustine2020} The precedents, FRBR and \textit{Textrad}, are not equipped to model such metadata.
+
+\subsubsection{The \textit{Archival Item} and its \textit{Pages}}
+
+A more significant incomptability between the \textit{Renaut de Montauban} test case and the existing data models arises when we introduce archival evidence. The five-volume \textit{Witness} to Aubert's \textit{Text} that is partly preserved in Paris and partly in Munich does not directly relate to what Sahle calls the text-as-document (\textit{Dokument}) and what the FRBR call the \textit{Item}. Both concepts, especially in the FRBR, are meant to fully describe a uniquely produced object. However, the written \textit{Witness} to an author's \textit{Text} does not always share the same boundaries as an \textit{Item} in the archive.
+
+We need an intervening entity to connect the multi-volume \textit{Witness} to the five phyiscal documents that substantiate it. Moreover, that intervening entity needs to have a discrete beginning and an end, representing one continous set of leafs or pages in the \textit{Archival Item}. Let us call the intervening entity \textit{Pages}, by which we mean one continous set of pages or leafs in a physical document. Figure \ref{fig:RenautFinal} illustrates how we would model the multi-volume \textit{Witness} of Aubert's \textit{Text}, taking into account the fact that the beginning and end of an \textit{Item} in the archive is not always synchronous with the beginning and end of a \textit{Witness}.
+
+\begin{figure}[ht]
+    \begin{center}
+    \input{sections/figures/renaut-example.tex}
+    \caption{Provisionary model of \textit{Renaut de Montauban} case.}
+    \label{fig:RenautFinal}
+    \end{center}
+\end{figure}
+
+It is necessary to introduce the intervening \textit{Pages} entity between the \textit{Witness} and the \textit{Item}. The reason is that an archival \textit{Item} may contain more than one \textit{Witness}. This happens to not be the case with \textit{Renaut de Montauban}. Each of the \textit{Items} contains nothing but its part of the \textit{Witness}. However, our second test case does involve manuscripts that transmit \textit{Witness} of more than one \textit{Work}, which will demonstrate the need for further development of the preexisting models.
+
+\subsection{\textit{Chanson d'Aspremont} and the lost manuscript}
+
+In 1586, a notary named François Daunys certified an agreement among a group of people that reasserted who owned which properties in the French villages of Fournels, Le Mazet, and La Vachelerie. In the years that followed, notaries and others in the region kept track of the legal agreement, which eventually made its way into the Archives départementales de la Lozère. Around 1883, archivist Ferdinand André noticed that two old pieces of parchment, which were being used to cover the 1586 contract, were in fact fragments of \textit{chansons de geste}, which he presumed dated from the thirteenth-century. André communicated his discovery to his colleagues and the fragments, being separated from the legal document, were sent to the Bibliothèque nationale de France (BNF), where they are conserved today in a nineteenth-century collection of Medieval fragments.
+
+The two pieces of parchment that André discovered make up the seventh and eighth folios of BNF, nouvelles aquisitions français (NAF) 5094. They are not of the same \textit{chanson}, though they do come from the same original manuscript. Thus, in our adapted version of the FRBR data model, informed by Sahle's \textit{Textrad}, the composite BNF NAF 5094 manuscript would upwardly relate to two \textit{Pages} entities, one which begins on 7r and ends on 7v, and the other which begins on 8r and ends on 8v. Each \textit{Pages} entity would then relate to its own \textit{Witness}, because each folio is the fragment of a different \textit{Text} of a different \textit{Work}. Figure \ref{fig:BNFNAF5094} illustrates these relationships.
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/figures/bnfnaf5094.tex}
+    \end{center}
+    \caption{Provisionary model of \textit{chansons de geste} in BNF NAF 5094.}
+    \label{fig:BNFNAF5094}
+\end{figure}
+
+\subsubsection{The \textit{Attested Document}}
+
+There is a glaring problem with the modeling in Figure \ref{fig:BNFNAF5094}. On the one hand, we know the Anglo-Norman \textit{Witnesses} of the two \textit{chansons de geste} are contained today in the same nineteenth-century collection of fragments, BNF NAF 5094, part II. This information is needed in order to locate digitisations of the \textit{Pages}' text, so it is good that the model includes it. On the other hand, however, we miss what scholars have compellingly argued, which is that these two \textit{chansons} were originally part of one composite manuscript. It is merely a coincidence that the two fragments (\textit{Witnesses} M and P\textsubscript{4}) are today in the same \textit{Archival Item}, BNF NAF 5094.
+
+We need another entity, which we call \textit{Attested Document} and through which the two fragments will be reunited by virtue of scholarly argumentation and research that claim they were initially trasmitted together. More detail about our test case of the \textit{Chanson d'Aspremont} reveals why an \textit{Attested Document} entity is so crucial. In the 1880s, while François André was sharing his discovery about the \textit{Chanson d'Otinel} and \textit{Chanson d'Aspremont} fragments in the Archives départementales de la Lozère, archivist Paul Meyer noted that the archives of a nearby French \textit{département}, the Puy-de-Dôme, also had a fragment of the \textit{Chanson d'Aspremont} that was being used to cover some records in their collection. Unlike the Lozère archives, the Puy-de-Dôme archives did not give the Bibliothèque nationale de France their fragment of the \textit{Chanson d'Aspremont}. Today, one can consult it at the Archives départementales de Clermont-Ferrand under the shelfmark I F2.
+
+The provisional data model illustrated Figure \ref{fig:AspremontCFBNF} allows us to recognize the attested coexistence of the three fragments in a now-lost manuscript. Because the missing document is not conserved as such anywhere, it lacks a clear identifier like the \textit{Archival Items} that have shelfmarks. To compensate, we generate a name that concatenates the \textit{Attested Document's} alleged parts. The known copies of the two \textit{chansons de geste}, \textit{Witnesses} M and P\textsubscript{4}, bypass their \textit{Pages} entities and meet one another directly in the \textit{Attested Document}.
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/figures/aspremont.tex}
+    \end{center}
+    \caption{Provisionary model of \textit{chansons de geste} in BNF, NAF 5094 and Clermont-Ferrand I F2.}
+    \label{fig:AspremontCFBNF}
+\end{figure}
+
+The model shown in Figure \ref{fig:AspremontCFBNF} perpetuates sigla (P\textsubscript{4}, C) that philologists have historically given to each fragment and communicates that both \textit{Witnesses} were likely transmitted together in the same manuscript (the \textit{Attested Document}). It does not, however, document the hypothesis that P\textsubscript{4} and C are in fact two parts of the same \textit{Witness}. While it is good to demonstrate that a manuscript contained copies of both the \textit{Chanson d'Otinel} and the \textit{Chanson d'Aspremont}, this is not sufficient. We do not want to lose the related theory that the verses of the Anglo-Norman \textit{Chanson d'Aspremont}, which are preserved today in two different fragments, are in fact different parts of one copy. Put another way, the model as is risks suggesting that the \textit{Attested Document} transmitted one copy of the Anglo-Norman \textit{Chanson d'Otinel} and two copies of the Anglo-Norman \textit{Chanson d'Aspremont}. The evidence does not suggest this latter claim.
+
+\subsubsection{Inter-\textit{Witness} relationships}
+
+It is not enough to fuse the \textit{Witnesses} P\textsubscript{4} and C into one. On the one hand, we want the data model to preserve the status of existing \textit{Witnesses} as well as operate with the sigla philologists have historically given to archival fragments. In other words, we want to keep the \textit{Witness} entities seen in Figure \ref{fig:AspremontCFBNF}. On the other hand, the data model needs to be able to reveal that the two fragmentary \textit{Witnesses}, P\textsubscript{4} and C, are presumably parts of one fragmented \textit{Witness}.
+
+The P\textsubscript{4} \textit{Witness} in BNF NAF 5094 does not start at the beginning of the \textit{Text}, meaning the Anglo-Norman version of the \textit{Chanson d'Asprmont}. As Jean-Baptiste Camps writes in his dissertation, the Paris fragment is likely missing about 85 verses of the beginning, after which it presents 395 verses of the \textit{Text}.\footcite[][xcvi]{camps2016} The Clermont-Ferrand (C) fragment presents the end of the \textit{Text}; it would total 384 verses if not for edges of its pages being cut. In putting the two fragments together, they miss about 85 verses at the beginning and 9606 in the middle. Their content does not overlap and, based on handwriting and language, there is reason to believe they were produced as one copy (\textit{Witness}) of the Anglo-Norman \textit{Chanson d'Aspremont}.
+
+\begin{table}[ht]
+    \begin{center}
+    \begin{tabular}{c||cccc}
+        \textit{Witness} & initial lacuna & P\textsubscript{4} text & middle lacuna & C text \\
+        \hline
+        \hline
+        P\textsubscript{4} + C & & 395 & & 377 [384] \\
+        Ch & 84 & 415 & 9606 & 388
+    \end{tabular}
+    \end{center}
+\caption{Reproduction of the comparison between the number of verses in the complete \textit{Witness} Ch and the fragments P\textsubscript{4} and C, originally published in the dissertation of Jean-Baptiste Camps\footcite[Table 1.3.][xcvii]{camps2016}}
+\label{tab:CampsAspremont}
+\end{table}
+
+Why not create another entity, the \textit{Attested Witness}? An example of such an entity is suggested in the first row of Table \ref{tab:CampsAspremont}, bearing the name ``P\textsubscript{4} + C.'' There is an ontological difference between the \textit{Archival Item} and the \textit{Attested Document} that justifies the latter's creation. The \textit{Archival Item} is a physical object in the world, which can be photographed and damaged. The \textit{Attested Document} is an historical claim asserting that a text object was once produced and existed in the world, but has not been conserved as such. An \textit{Attested Witness} and a regular \textit{Witness} are ontologically similar in that they are both philological claims that the sequence of characters inscribed on the pages of some document intentionally represents the linguistic content of a \textit{Text}, or of a text-as-linguistic-content as Sahle puts it. The difference between the alleged \textit{Witness} ``P\textsubscript{4} + C'' and the \textit{Witnesses} P\textsubscript{4} and C is not categorical; it does not justify the creation of a new entity.
+
+The more efficient way to make legible in the data model the theoretical \textit{Witness} ``P\textsubscript{4} + C'' is to build that information into attributes of the \textit{Witnesses} that constitute it. A \textit{Witness} relates to one \textit{Text} and either no \textit{Pages}, as in the case of hypothetical nodes in a stemma, or one or more \textit{Pages} entities. In the case of the \textit{Chanson d'Aspremont}, each \textit{Witness} entity relates to one \textit{Pages} entity. This is in contrast to the \textit{Witness} in the case of \textit{Renaut de Montauban}, which relates to more than one \textit{Pages} entities becaue it is a multi-volume \textit{Witness}.
+
+The provisional model in Figure \ref{fig:WitnessRelations} shows how a \textit{Witness} can relate to another \textit{Witness} via the attribute ``is preceded by.'' In the \textit{Chanson d'Aspremont} case, the \textit{Witness} P\textsubscript{4} would not have any value assigned to the attribute ``is preceded by'' because it is the root of a sequence of \textit{Witness} fragments; it is not preceded by anything. The \textit{Witness} C, on the other hand, would refer to P\textsubscript{4} in its field ``is preceded by.'' The fact that the P\textsubscript{4} \textit{Witness} would not have any value in its ``is preceded by'' attribute, yet it has the status of ``fragment,'' could mean one of two things: (a) it is the only known fragment of that \textit{Witness}, or (b) that it is the root in a sequence of fragments that constitute one attested \textit{Witness}. To determine which is the case, one would need to identify roots of sequences by grouping all the \textit{Witnesses} based on other fragment \textit{Witnesses} referenced in the attribute ``is preceded by.''
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/figures/lostwitness.tex}
+    \end{center}
+    \caption{Relationships between \textit{Witnesses} and neighboring entities in provisional model.}
+    \label{fig:WitnessRelations}
+\end{figure}
+

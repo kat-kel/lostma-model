@@ -1,0 +1,241 @@
+
+\subsection{Vocabularies}
+
+\subsubsection{genre}
+\begin{itemize}
+    \item epic
+\end{itemize}
+
+\subsubsection{subgenre}
+\begin{multicols}{3}
+
+\begin{itemize}
+    \item Bestiaire
+    \item biblique
+    \item chanson de geste
+    \item chanson de saint
+    \item Chronicle
+    \item Conte
+    \item didactique
+    \item drama
+    \item Encyclopédie
+    \item Fable
+    \item hagiographie
+    \item Lai
+    \item lyrique
+    \item Mircales+lyrique
+    \item narratif
+    \item roman
+    \item roman antique
+    \item roman antique en vers
+    \item roman arthurien en prose
+    \item roman arthurien en vers
+    \item roman d'aventures
+    \item roman en prose
+    \item Vie
+\end{itemize}
+
+\end{multicols}
+
+\subsubsection{Verse Type}
+\begin{itemize}
+    \item alexandrines
+    \item decasyllables
+    \item hexasyllables
+    \item octosyllables
+\end{itemize}
+
+\subsubsection{Rhyme Type}
+\begin{itemize}
+    \item assonance
+    \item rhyme
+\end{itemize}
+
+\subsubsection{Language}
+\begin{itemize}
+    \item frm
+    \item fro
+    \item fro\_ENG
+    \item fro\_IT
+    \item fro\_PRO
+    \item pro
+\end{itemize}
+
+\subsection{Attributes}
+
+\begin{longtable}{|
+    |m{0.15\textwidth}
+    |m{0.05\textwidth}
+    |m{0.1\textwidth}
+    |m{0.1\textwidth}
+    |m{0.2\textwidth}
+    |m{0.3\textwidth}
+||}
+    \hline
+    Attribute Name & Count & Data Type & Vocab. & Description & Semantic Reference \\
+    \hline
+
+    \multicolumn{6}{|c|}{Relations}\\
+    \hline
+    \textbf{work\_id} %Field
+        & 1 %N
+        & \textbf{work} (foreign key)%Type
+        & %Vocab
+        & \textit{Reference to the work.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    
+    \multicolumn{6}{|c|}{General Information}\\
+    \hline
+    \textbf{title} %Field
+        & 1 %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Title of the text.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{responsibility} %Field
+        & \[\geq 0\] %N
+        & \textbf{Person} (foreign key)%Type
+        & %Vocab
+        & \textit{Author or authors to whom the text is attributed.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{earliest\_witness} %Field
+        & \[\leq 1\] %N
+        & date %Type
+        & %Vocab
+        & \textit{Date of the earliest identified or presumed witness, whether existant or not, which is effectively the origin date of the text.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{genre} %Field
+        & \[\leq 1\] %N
+        & terms list (text)%Type
+        & \textbf{genre}%Vocab
+        & \textit{Genre of the text.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{subgenre} %Field
+        & \[\leq 1\] %N
+        & terms list (text)%Type
+        & \textbf{subgenre}%Vocab
+        & \textit{Subgenre of the text.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{language} %Field
+        & \[\leq 1\] %N
+        & terms list (text)%Type
+        & \textbf{language}%Vocab
+        & \textit{Primary language of the text.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{form} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{verse\_type} %Field
+        & \[\leq 1\] %N
+        & terms list (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{rhyme\_type} %Field
+        & \[\leq 1\] %N
+        & terms list (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{length} %Field
+        & \[\leq 1\] %N
+        & numeric (integer)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+
+    \multicolumn{6}{|c|}{Reference}\\
+    \hline
+    \textbf{arlima\_id} %Field
+        & \[\leq 1\] %N
+        & numeric (integer)%Type
+        & %Vocab
+        & \textit{Identifier in Arlima.} %Description
+        & \texttt{ARLIMA ID}, \url{https://data.biblissima.fr/w/Property:P121} %Semantic Reference
+        \\
+    \hline
+    \textbf{bossuat\_ref} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{deaf\_ref} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{jonas\_id} %Field
+        & \[\leq 1\] %N
+        & numeric (integer)%Type
+        & %Vocab
+        & \textit{Identifier in Jonas.} %Description
+        & \texttt{Jonas ID}, \url{https://data.biblissima.fr/w/Property:P140} %Semantic Reference
+        \\
+    \hline
+    \textbf{moisan\_id} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{philobiblon\_id} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{suard\_id} %Field
+        & \[\leq 1\] %N
+        & single line (text)%Type
+        & %Vocab
+        & %Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{note\_reference} %Field
+        & \[\geq 0\] %N
+        & multi-line (text)%Type
+        & %Vocab
+        & \textit{Note(s) concerning how to identify the entity in an external reference or database.} %Description
+        & %Semantic Reference
+        \\
+    \hline
+
+\caption{Proposed Text Attributes} % needs to go inside longtable environment
+\label{tab:proposedTextAttributes}
+\end{longtable}

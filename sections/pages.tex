@@ -1,0 +1,93 @@
+The \textit{Pages} entity indicates one of the potentially multiple passages of consecutive text that compose the \textit{Witness}. For example, if a \textit{Witness} is fragmentary and parts are rebound in three disconnected passages of a manuscript, the \textit{Witness} would have a relationship to three \textit{Pages} entities, each of which would have a relationship to the same \textit{Historical Document} entity. On the other hand, if a \textit{Witness} is comprised of four manuscript volumes, the \textit{Witness} would be related to four \textit{Pages} entities, and each \textit{Pages} would be related to a different \textit{Historical Document}. Finally, as is most often the case, if a \textit{Witness} exists in one contiguous passage in one manuscript, it would have one relationship to a \textit{Pages} entity, which in turn would have a relationship to one \textit{Historical Document}. The intermediary \textit{Pages} entity allows for a diversity of \textit{Witnesses}, some of which might be composed across disconnected passages.
+
+\subsubsection{Vocabularies}
+
+The \textit{Pages} entity has no need for a controlled vocabulary because it primarily serves to store a single page range and, when a IIIF digitisation is available, metadata including the range of the page views and a link to a IIIF manifest file.
+
+\subsubsection{Attributes}
+
+\begin{longtable}{|
+    |m{0.15\textwidth}
+    |m{0.05\textwidth}
+    |p{0.15\textwidth}
+    |m{0.1\textwidth}
+    |m{0.2\textwidth}
+    |m{0.2\textwidth}
+||}
+    \hline
+    Attribute Name & Count & Data Type & Vocab. & Description & Semantic Reference \\
+    \hline
+
+    \multicolumn{6}{|c|}{References}\\
+    \hline
+    \textbf{witness\_id} %Field
+        & 1 %N
+        & \textbf{witness} (foreign key)%Type
+        & %Vocab
+        & \textit{Reference to the witness to which the passage belongs.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{document\_id} %Field
+        & 1 %N
+        & \textbf{document} (foreign key)%Type
+        & %Vocab
+        & \textit{Reference to the document in which the passage appears.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+
+    \multicolumn{6}{|c|}{General Information}\\
+    \hline
+    \textbf{volume\_order} %Field
+        & \[\geq 0\] %N
+        & numeric (integer)%Type
+        & %Vocab
+        & \textit{If the witness is diffused across multiple volumes or fragments, the index of this volume or passage within the sequence.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{page\_start} %Field
+        & \[\geq 0\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Folio indication of the start of the textual content.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{page\_end} %Field
+        & \[\geq 0\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{Folio indication of the end of the textual content.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{view\_start} %Field
+        & \[\geq 0\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{If digitised, the first page view of the textual content.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{view\_end} %Field
+        & \[\geq 0\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{If digitised, the last page view of the textual content.}%Description
+        & %Semantic Reference
+        \\
+    \hline
+    \textbf{iiif\_manifest} %Field
+        & \[\geq 0\] %N
+        & single line (text)%Type
+        & %Vocab
+        & \textit{URL to IIIF manifest of the images containing the textual content.}%Description
+        & \texttt{IIIF manifest URL}, \url{https://www.wikidata.org/wiki/Property:P6108}%Semantic Reference
+        \\
+    \hline
+
+\caption{Proposed Content Attributes} % needs to go inside longtable environment
+\label{tab:proposedContentAttributes}
+\end{longtable}

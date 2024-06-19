@@ -1,0 +1,178 @@
+To realize this conceptual hierarchy in a relational database framework, we created an intermediary entity between the \textit{Witness} and the \textit{Document}. A relational entity (table) between the two core concepts is necessary to accommodate such cases as the Renaut de Montauban witness. Because the \textit{Document} entity is indifferent to the content it contains, the entity does not bare any information about on which of its pages the text is inscribed. However, that information cannot consistently be attributed to the \textit{Witness} entity either because, as in the case of Renaut de Montauban, sometimes a single witness is manifest across multiple passages in multiple documents. Therefore, to maintain the relationship between a potentially multi-volume or fragmented witness, like ``Am'' of \textit{Renaut de Montauban}, we need an intermediary entity, which we call \textit{Pages}.
+
+The entity-relationship diagram in Figure \ref{fig:ERDiagram} illustrates the five core entities already discussed, the intermediary \textit{Pages}, and two others: \textit{Repository} and \textit{Stemma}. The former is effectively a controlled vocabulary for the different archival institutions in which manuscripts can be stored, but realized as an entity in order to feature attributes that help contributors better identify the institution and avoid adding duplicates. As a base for the \textit{Repository} table, we have scraped, cleaned, and enriched all the institutions listed on the Archives Portal Europe website.\footcite[][]{ArchivesPortal}
+
+The \textit{Stemma} entity also functions as a kind of relational table between \textit{Text} and \textit{Witness}, linking both resources to a stemma publication in the \textit{OpenStemmata Project} database. The actual, hereditary relationships between \textit{Witnesses} of a \textit{Text} are encoded in a graph database. The relational database framework, shown in Figure \ref{fig:ERDiagram}, primarily documents the existence of \textit{Witneses} and \textit{Texts} in one of the encoded stemmata.
+
+\begin{figure}[ht]
+\begin{center}
+\begin{tikzpicture}
+    \pic [] { entity = {{cycle}
+        {\textbf{Cycle}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{parent\_cycle} \\
+          \hline
+          title \\
+          \hline
+          arlima\_id \\
+          jonas\_id \\
+          deaf\_ref \\
+          moisan\_ref
+        }
+    }};
+  
+    \pic [right = 4em of cycle] { entity = {{work}
+        {\textbf{Work}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{cycle\_id} \\
+          \hline
+          title \\
+          \hline
+          arlima\_id \\
+          jonas\_id \\
+          deaf\_ref \\
+          moisan\_ref
+        }
+    }};
+  
+    \draw[oone-many] (cycle) -- node[label,above]{} (work);
+    
+    \pic [right = 4em of work] { entityassociative = {{text}
+        {\textbf{Text}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{work\_id} \\
+          \hline
+          title \\
+          responsibility \\
+          earliest\_witness \\
+          \hline
+          genre \\
+          subgenre \\
+          language \\
+          form \\
+          verse\_type \\
+          rhyme\_type \\
+          length \\
+          \hline
+          arlima\_id \\
+          bossuat\_ref \\
+          deaf\_ref \\
+          jonas\_id \\
+          moisan\_ref \\
+          philobiblon\_id \\
+          suard\_ref \\
+          note\_reference
+        }
+    }};
+  
+    \draw[one-many] (work) -- node[label,above]{} (text);
+
+    \pic [right = 4em of text] { entityassociative = {{witness}
+        {\textbf{Witness}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{text\_id} \\
+          \hline
+          siglum \\
+          status \\
+          \hline
+          tei\_document\_id
+        }
+    }};
+
+    \draw[one-omany] (text) -- node[label,above]{} (witness);
+
+    \pic [below = 8em of text] { entityassociative = {{stemma}
+        {\textbf{Stemma}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{witness\_id} \\
+          \textbf{text\_id} \\
+          \hline
+          author \\
+          citation
+        }
+    }};
+
+    \draw[one-omany] (text) -- node[label,above]{} (stemma);
+    \draw[many-omany] (witness) -- node[label,above]{} (stemma);
+
+    \pic [below = 6em of witness] { entityassociative = {{pages}
+        {\textbf{Pages}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{witness\_id} \\
+          \textbf{document\_id} \\
+          \hline
+          volume\_order \\
+          page\_start \\
+          page\_end \\
+          view\_start \\
+          view\_end \\
+          iiif\_manifest \\
+        }
+    }};
+
+    \draw[one-omany] (witness) -- node[label,above]{} (pages);
+
+    \pic [below = 2em of work] { entityassociative = {{doc}
+        {\textbf{Historical Document}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{repository\_id} \\
+          collection \\
+          shelfmark \\
+          note\_provenance \\
+          origin\_location \\
+          origin\_date \\
+          date\_freetext \\
+          date\_source \\
+          \hline
+          iiif\_manifest \\
+          digitisation\_url \\
+          \hline
+          arlima\_id \\
+          bnf\_id \\
+          jonas\_id \\
+          philobiblon\_id \\
+          viaf\_id \\
+          note\_reference
+        }
+    }};
+
+    \draw[many-one] (pages) -- node[label,above]{} (doc);
+
+    \pic [left = 4em of doc] { entityassociative = {{repo}
+        {\textbf{Repository}}
+        {
+          \textbf{id} \\
+          \hline
+          Site Name \\
+          Street Address \\
+          Website \\
+          \hline
+          Archives Portal Europe Reference \\
+          \hline
+          Country \\
+          WikiData ID\\
+          GeoShape Map
+        }
+    }};
+
+    \draw[many-one] (doc) -- node[label,above]{} (repo);
+
+  \end{tikzpicture}
+\caption{LostMa Entity-Relationship Diagram}
+\label{fig:ERDiagram}
+\end{center}
+\end{figure}

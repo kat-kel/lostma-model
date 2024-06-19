@@ -1,0 +1,58 @@
+\tikzstyle{s} = [rectangle, rounded corners, minimum width=2cm, text width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\begin{tikzpicture}[-,shorten >=1pt,auto,node distance=1.5cm,semithick]
+\tikzstyle{every state}=[fill=red,draw=none,text=white]
+
+\pic [] { entityassociative = {{cycle}
+{\textbf{Cycle}}
+{
+  \textbf{ID} \\
+  \hline
+  title \\
+  is part of \\
+}
+}};
+
+\pic [right = 12em of cycle] { entityassociative = {{work}
+{\textbf{Work}}
+{
+  \textbf{ID} \\
+  \hline
+  title \\
+  is part of \\
+  is modeled on \\
+}
+}};
+
+
+\pic [right = 12em of work] { entityassociative = {{text}
+{\textbf{Text}}
+{
+  \textbf{ID} \\
+  \hline
+  is expression of \\
+  is modeled on \\
+  title \\
+  person creator \\
+  person translator \\
+  creation date \\
+  creation date text \\
+  creation date cite \\
+  matter \\
+  regional genre\\
+  language\\
+  form\\
+  poetic meter\\
+  stanza length \\
+  verse length \\
+  rhyme perfection\\
+}
+}};
+
+\draw[one-omany] (cycle.east) -- node[label, above]{Work is part of} (work.west);
+\draw[one-omany] (cycle.east) -- node[label, below]{1 and only 1 Cycle} (work.west);
+
+\draw[one-many] (work.east) -- node[label, above]{Work has 1 or more} (text.west);
+\draw[one-many] (work.east) -- node[label, below]{Text expressions} (text.west);
+
+\end{tikzpicture}

@@ -1,0 +1,98 @@
+\begin{tikzpicture} 
+    \pic [] { entityassociative = {{text}
+        {\textbf{Text}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{work\_id} \\
+          title \\
+          responsibility \\
+          date \\
+          date\_freetext \\
+          genre \\
+          subgenre \\
+          language \\
+          form \\
+          verse\_type \\
+          rhyme\_type \\
+          length \\
+        }
+    }};
+
+    \pic [right = 3em of text] { entityassociative = {{witness}
+        {\textbf{Witness}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{text\_id} \\
+          siglum \\
+          status \\
+          tei\_document\_id
+        }
+    }};
+
+    \draw[one-omany] (text) -- node[label,above]{} (witness);
+
+    \pic [right = 3em of witness] { entityassociative = {{pages}
+        {\textbf{Pages}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{witness\_id} \\
+          \textbf{cont\_document\_id} \\
+          \textbf{hist\_document\_id} \\
+          witness\_ordinal \\
+          document\_part\\
+          page\_start\_no \\
+          page\_start\_suffix \\
+          page\_end\_no \\
+          page\_end\_suffix \\
+          first\_image \\
+          last\_image \\
+        }
+    }};
+
+    \draw[one-omany] (witness) -- node[label,above]{} (pages);
+
+    \pic [right = 3em of pages] { entityassociative = {{doc}
+        {\textbf{Contemporary Document}}
+        {
+          \textbf{id} \\
+          \hline
+          \textbf{repository\_id} \\
+          collection \\
+          shelfmark \\
+          note\_provenance \\
+          origin\_location \\
+          origin\_date \\
+          date\_freetext \\
+          date\_source \\
+          digitisation\_url \\
+          iiif\_manifest \\
+          ark\\
+          arlima\_id\\
+          biblissima\_id\\
+          bnf\_id\\
+          jonas\_id\\
+          note\_reference
+        }
+    }};
+
+    \draw[many-one] (pages) -- node[label,above]{} (doc);
+
+    \pic [below = 3em of pages] { entityassociative = {{hist}
+        {\textbf{Historical Document}}
+        {
+          \textbf{id} \\
+          \hline
+          reference\_title \\
+          origin\_date \\
+          date\_freetext \\
+          origin\_location \\
+          note \\
+        }
+    }};
+
+    \draw[omany-one] (pages) -- node[label,above]{} (hist);
+
+\end{tikzpicture}

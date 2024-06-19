@@ -1,0 +1,22 @@
+One of the most robust bibliographic data models is the Functional Requirements for Bibliographic Records (FRBR), which slowly solidified during the last quarter of the twentieth century and is still today used to structure bibliographic databases.\footcite[][]{FRBR_Worldcat} In 1961, information scientists from around the world gathered in Paris to discuss best practices for cataloguing. Following their Paris meeting, the International Federation of Library Associations (IFLA) supported further discussions and members developed theoretical frameworks for organizing bibliographic data. Finally, in 1997, the IFLA approved the FRBR.\footcite{FRBR_1998} The FRBR articulates a generalizable hierarchy of four related entities: Works (\textbf{W}), Expressions (\textbf{E}), Manifestations (\textbf{M}), and Items (\textbf{I}). One of the examples in the 2009 corrected edition demonstrates how these entities relate to one another through the case of Johann Sebastian Bach's Goldberg variations.\footcite[We have augmented the example by adding an Item.][58]{FRBR_2009}
+
+\begin{itemize}
+    \item \textbf{W\textsubscript{1}} J. S. Bach's Goldberg variations
+    \begin{itemize}
+        \item \textbf{E\textsubscript{1}} performances by Glenn Gould recorded in 1981
+        \begin{itemize}
+            \item \textbf{M\textsubscript{1}} recording released on 33 1/3 rpm sound disc in 1982 by CBS Records
+            \item \textbf{M\textsubscript{2}} recording re-released on compact disc in 1993 by Sony
+            \begin{itemize}
+                \item \textbf{I\textsubscript{1}} copy held at Cook Music Library, Bloomington, Indiana, USA (WOODWARD CD .B118 K1.988-35)
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+In the FRBR model, a \textit{Work} is ``a distinct intellectual artistic creation'' and can have a title, a date, and a form or genre.\footcite[][17]{FRBR_2009} An \textit{Expression} is an ``intellectual or artistic realization'' of the \textit{Work} in some specific form, such as alpha-numeric or musical notation, sound, image, or movement.\footcite[][19]{FRBR_2009} Manifestations are the concrete, ``physical embodiment'' of the \textit{Expression} of a \textit{Work}.\footcite[][21]{FRBR_2009} For instance, if an \textit{Expression} of a \textit{Work} is notated in Vedic Sanskrit around 900 BCE, a \textit{Manifestation} of that literary \textit{Expression} would be a physical manuscript. Finally, an Item is a ``single exemplar of a manifestation,'' which is a concept best suited for mass-produced resources, such as copies of an edited book or, as in the example above, copies of a CD-ROM.\footcite[][24]{FRBR_2009}
+
+% \begin{table}[ht]
+% \input{sections/intro/figures/frbr/renaut.tex}
+% \caption{FRBR with test case \textit{Renaut de Montauban}.}
+% \end{table}
