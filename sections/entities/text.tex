@@ -43,7 +43,7 @@
   \textbf{ID} \\
   \hline
   title \\
-  is example of \\
+  is manifestation of \\
   siglum \\
   siglum source \\
   status \\
@@ -70,7 +70,7 @@
   \textbf{ID} \\
   \hline
   name \\
-  is example of \\
+  is manifestation of \\
   scribe \\
   scripta \\
   note \\
@@ -80,10 +80,10 @@
 \draw[one-many] (work) -- node[label, above]{Text is expression of} (text);
 \draw[one-many] (work) -- node[label, below]{1 and only 1 Work} (text);
 
-\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text has example of} (witness);
+\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in} (witness);
 \draw[one-omany] (text) -- node[label, below, yshift=-0.10cm]{0 or many Witnesses} (witness);
 
-\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text has example of 0 or} (attestedWitness);
+\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in 0 or} (attestedWitness);
 \draw[one-omany] (text) -- node[label, below, yshift=-0.10cm]{many Attested Witnesses} (attestedWitness);
 
 \draw[omany-omany] (text) -- node[label, above]{Text is written/translated by} (person);
