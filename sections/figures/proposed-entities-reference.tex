@@ -21,7 +21,7 @@
 
 \node[s] (document) [right of=repo, xshift=1cm] {Attested Document};
 
-% \node[s] (reference) [above of=pages, xshift=-2cm, yshift=-0.75cm] {Reference};
+\node[s] (reference) [above of=pages, xshift=-2cm, yshift=-0.75cm] {Reference};
 
 % \draw[dashed, ->] (witness.-45) arc (200:475:8mm) 
 %   node[pos=0.5, below] () {is preceded by};
@@ -58,15 +58,15 @@
 % \draw[dashed, ->] (attestedWitness) -- (document)
 %   node[pos=0.5, right] {was contained in};
 
-% \path[every node]
-%   (reference) edge[dashed, ->] node[]{} (cycle)
-%   (reference) edge[dashed, ->] node[]{} (work)
-%   (reference) edge[dashed, ->] node[]{} (text)
-%   (reference) edge[dashed, ->, bend left=10] node[]{} (person)
-%   (reference) edge[dashed, ->, bend right=30] node[]{} (item)
-%   (reference) edge[dashed, ->] node[]{} (witness)
-%   (reference) edge[dashed, ->, bend right=76] node[]{} (document)
-%   ;
+\path[every node]
+  (reference) edge[dashed, ->] node[]{} (cycle)
+  (reference) edge[dashed, ->] node[]{} (work)
+  (reference) edge[dashed, ->] node[]{} (text)
+  (reference) edge[dashed, ->, bend left=10] node[]{} (person)
+  (reference) edge[dashed, ->, bend right=30] node[]{} (item)
+  (reference) edge[dashed, ->] node[]{} (witness)
+  (reference) edge[dashed, ->, bend right=76] node[]{} (document)
+  ;
 
 % \path[every node]
 %   (attestedWitness) edge[dashed, ->, bend right=100] node [pos=0.5, right] {is instance of} (text)

@@ -43,11 +43,25 @@
   language\\
   form\\
   poetic meter\\
-  stanza length \\
+  rhyme type \\
+  strophe count \\
+  strophe length \\
   verse length \\
-  rhyme perfection\\
 }
 }};
+
+\pic [below = 5em of work] { entityassociative = {{reference}
+{\textbf{Reference}}
+{
+  entity type\\
+  entity ID \\
+  unique identifier \\
+  identifier source \\
+  citation \\
+}
+}};
+
+\draw[omany-omany] (reference) -- node[label, left, pos=0.5]{Work has 0, 1, or many References} (work);
 
 \draw[one-omany] (cycle.east) -- node[label, above]{Work is part of} (work.west);
 \draw[one-omany] (cycle.east) -- node[label, below]{1 and only 1 Cycle} (work.west);

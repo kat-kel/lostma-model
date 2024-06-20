@@ -8,15 +8,16 @@
 {
   \textbf{ID} \\
   \hline
-  \textbf{Text ID} \\
+  is manifestation of\\
+  is preceded by\\
+  was contained in\\
   siglum \\
   status \\
   TEI document\\
   scribe\\
   scripta\\
   creation date\\
-  is preceded by\\
-  was contained in
+  creation date text\\
 }
 }};
 
@@ -62,8 +63,8 @@
 \draw[one-omany] (text) -- node[label,above]{Witness is instance} (witness);
 \draw[one-omany] (text) -- node[label,below]{of 1 and only 1 Text} (witness);
 
-\draw[one-omany] (witness) --node[label, above]{Witness is visible} (pages);
-\draw[one-omany] (witness) --node[label, below]{on 0 or many Pages} (pages);
+\draw[one-many] (witness) --node[label, above]{Witness is visible on} (pages);
+\draw[one-many] (witness) --node[label, below]{1 or many Pages} (pages);
 
 
 

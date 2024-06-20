@@ -21,26 +21,39 @@
   language\\
   form\\
   poetic meter\\
-  stanza length \\
+  rhyme type \\
+  strophe count \\
+  strophe length \\
   verse length \\
-  rhyme perfection\\
 }
 }};
 
 
-\pic [right = 12em of text] { entityassociative = {{person}
+\pic [right = 10em of text] { entityassociative = {{person}
 {\textbf{Person}}
 {
   \textbf{ID} \\
   \hline
   name \\
-  birth year \\
-  death year \\
-  location
+  note
 }
 }};
 
+\pic [right = 10em of person] { entityassociative = {{reference}
+{\textbf{Reference}}
+{
+  entity type\\
+  entity ID \\
+  unique identifier \\
+  identifier source \\
+  citation \\
+}
+}};
+
+\draw[omany-omany] (reference) -- node[label, above, pos=0.5]{Person has 0, 1, or} (person);
+\draw[omany-omany] (reference) -- node[label, below, pos=0.5]{many References} (person);
+
 \draw[omany-omany] (text) -- node[label, above]{Person wrote/translated} (person);
-\draw[omany-omany] (text) -- node[label, below]{0 or many Texts} (person);
+\draw[omany-omany] (text) -- node[label, below]{0, 1, or many Texts} (person);
 
 \end{tikzpicture}

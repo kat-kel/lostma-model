@@ -13,18 +13,32 @@
 }
 }};
 
-\pic [right = 15em of cycle] { entityassociative = {{work}
+\pic [right = 10em of cycle] { entityassociative = {{work}
 {\textbf{Work}}
 {
   \textbf{ID} \\
   \hline
   title \\
   is part of \\
+  is modeled on\\
 }
 }};
 
+\pic [left = 10em of cycle] { entityassociative = {{reference}
+{\textbf{Reference}}
+{
+  entity type\\
+  entity ID \\
+  unique identifier \\
+  identifier source \\
+  citation \\
+}
+}};
+
+\draw[omany-omany] (reference) -- node[label, above]{Cycle has 0, 1, or} (cycle);
+\draw[omany-omany] (reference) -- node[label, below]{many References} (cycle);
 
 \draw[one-many] (cycle.east) -- node[label, above]{Cycle has 1 or more} (work.west);
-\draw[one-many] (cycle.east) -- node[label, below]{Works that are part of it}(work.west);
+\draw[one-many] (cycle.east) -- node[label, below]{Works part of it}(work.west);
 
 \end{tikzpicture}

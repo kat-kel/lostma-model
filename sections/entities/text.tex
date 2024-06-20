@@ -21,13 +21,14 @@
   language\\
   form\\
   poetic meter\\
-  stanza length \\
+  rhyme type \\
+  strophe count \\
+  strophe length \\
   verse length \\
-  rhyme perfection\\
 }
 }};
 
-\pic [above = 7em of text] { entityassociative = {{work}
+\pic [above = 7em of text, xshift=-12em] { entityassociative = {{work}
 {\textbf{Work}}
 {
   \textbf{ID} \\
@@ -42,25 +43,26 @@
 {
   \textbf{ID} \\
   \hline
-  title \\
-  is manifestation of \\
+  is manifestation of\\
+  is preceded by\\
+  was contained in\\
   siglum \\
-  siglum source \\
   status \\
-  scribe \\
-  scripta \\
+  TEI document\\
+  scribe\\
+  scripta\\
+  creation date\\
+  creation date text\\
 }
 }};
 
-\pic [below = 7em of text] { entityassociative = {{person}
+\pic [above = 7em of text, xshift=12em] { entityassociative = {{person}
 {\textbf{Person}}
 {
   \textbf{ID} \\
   \hline
   name \\
-  birth year \\
-  death year \\
-  location
+  note
 }
 }};
 
@@ -77,16 +79,28 @@
 }
 }};
 
-\draw[one-many] (work) -- node[label, above]{Text is expression of} (text);
-\draw[one-many] (work) -- node[label, below]{1 and only 1 Work} (text);
+\pic [below = 7em of text] { entityassociative = {{reference}
+{\textbf{Reference}}
+{
+  entity type\\
+  entity ID \\
+  unique identifier \\
+  identifier source \\
+  citation \\
+}
+}};
 
-\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in} (witness);
-\draw[one-omany] (text) -- node[label, below, yshift=-0.10cm]{0 or many Witnesses} (witness);
+\draw[omany-omany] (reference) -- node[label, pos=0.5, right]{Cycle has 0, 1, or many References} (text);
 
-\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in 0 or} (attestedWitness);
+\draw[one-many] (work) -- node[label, pos=0.5, left]{Text is expression of 1 and only 1 Work} (text);
+
+\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in 0, 1, or} (witness);
+\draw[one-omany] (text) -- node[label, below, yshift=-0.10cm]{many Witnesses} (witness);
+
+\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in 0, 1, or} (attestedWitness);
 \draw[one-omany] (text) -- node[label, below, yshift=-0.10cm]{many Attested Witnesses} (attestedWitness);
 
-\draw[omany-omany] (text) -- node[label, above]{Text is written/translated by} (person);
-\draw[omany-omany] (text) -- node[label, below]{0 or many Persons} (person);
+\draw[omany-omany] (text) -- node[label, pos=0.40, right]{Text is written by 0, 1, or many Persons} (person);
+\draw[omany-omany] (text) -- node[label, pos=0.60, right]{Text is translated by 0, 1, or many Persons} (person);
 
 \end{tikzpicture}

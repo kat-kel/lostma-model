@@ -2,39 +2,47 @@ Having explored existing data models and tested their limitations against severa
 
 \subsection{Entity relationships}
 
-In Section \ref{sec:basicER}, we start by simply introducing the entities' names and the nature of their relationships to one another. Subsequently, we present a technical schematic of the entities' relationships to one another.
+We start by simply introducing the entities' names and the nature of their relationships to one another. Subsequently, we present a technical schematic of the entities' relationships to one another. Figure \ref{fig:ProposedEntities} illustrates the entities and relationships in our proposed model.
 
-\subsubsection{Nature of the relationships between entities}
-\label{sec:basicER}
+\subsubsection{Intertextuality}
 
-In Figure \ref{fig:ProposedEntities}, we see that one \textit{Cycle} can be a part of another \textit{Cycle} via the foreign-key relationship ``is part of.'' This is case when one the subject of one \textit{Cycle}, such as \textit{Works} about Charlemagne's knight Agolant, can also be interpretted as being a part of a larger \textit{Cycle}, such as a \textit{Cycle} about Charlemagne broadly. Thus, due to \textit{Cycles'} potential inter-entity connections, the same relationship ``is part of'' applies to \textit{Cycles} and to \textit{Works}. In our proposed model, a \textit{Cycle} can have only one parent \textit{Cycle} and a \textit{Work} belongs to the tradition of only one \textit{Cycle}. Both of these relationships are optional.
+On the top level of Figure \ref{fig:ProposedEntities}, running from left to right, are the three abstract entities, \textit{Cycle}, \textit{Work}, and \textit{Text}, that manage information about intertextuality in our corpus. \textit{Works} and \textit{Cycles} can be nested together within the scope of a \textit{Cycle}, based on the \textit{Works'} narrative content; both entities have the attribute ``is part of,'' which points to a \textit{Cycle} entity. \textit{Works} can also be modeled on other works, as in the case of a new \textit{Work} compiling and reworking the episodes and characters from two or more pre-existing \textit{Works}. The data model also registers intertextuality amongst \textit{Texts}, which can be modeled on one another as translations, prosifications, abbreviations, elaborations, versifications, or other forms of adapting the expression (\textit{Text}) of a common \textit{Work}. The nature of a \textit{Text's} relationship to a model \textit{Text} can be inferred through differences and similarities in the two entities' attributes, such as their language and literary form.
 
 \begin{figure}[ht]
     \begin{center}
         \input{sections/figures/proposed-entities.tex}
     \end{center}
-\caption{Proposed Entities}
+\caption{Proposed Entities.}
 \label{fig:ProposedEntities}
 \end{figure}
 
-The \textit{Text} entity can have five relationships, three of which originate from it, as seen in Figure \ref{fig:ProposedEntities}. First, a \textit{Text} must relate to one and only one \textit{Work}. According to our definition, the \textit{Text} is the expression in a certain human language and literary style of a \textit{Work}. One \textit{Text} can be modeled on or the translation of an anterior \textit{Text}. Furthermore, a \textit{Text} can optionally be related to one or more \textit{Person} entities. The latter can be responsible either for authoring the \textit{Text} or for translating it. Finally, a \textit{Text} should have at least one \textit{Witness} or \textit{Attested Witness} relate to it; otherwise, we would have no evidence of the abstract \textit{Text} entity's existence. However, the relationship between a \textit{Text} and either of the two types of witnesses (extant \textit{Witness} and lost \textit{Attested Witness}) stems from the latter and is not a requirement for the \textit{Text} entity.
+\subsubsection{Archival Evidence}
 
-Originating from the extant \textit{Witness} are potentially five types of entity relationships. First and foremost, a \textit{Witness} must relate to one and only one \textit{Text}. By definition, a \textit{Witness} is a version of the text's linguistic content, spelled out in a sequence of characters, as demonstrated in Table \ref{tab:TextVersions}. Second, the \textit{Witness}, by virtue of being extant and not a lost \textit{Attested Witness}, must be visible on the \textit{Pages} of an \textit{Archival Item}. When it has survived through fragments, one \textit{Witness} can relate to another through the attribute ``is preceded by.'' This is the case when one fragment is presumed to have come after another fragment, as demonstrated in the Table \ref{tab:CampsAspremont}.
+Stemming from an extant \textit{Witness} are potentially four types of relationships to other entities. First and foremost, a \textit{Witness} must relate to one and only one \textit{Text}. By definition, a \textit{Witness} is an extant version of a \textit{Text's} linguistic content, spelled out in a sequence of characters, as demonstrated in Table \ref{tab:TextVersions}. Therefore, the \textit{Witness} must be the manifestation of a \textit{Text}. Second, the \textit{Witness}, by virtue of being extant, must be visible on the \textit{Pages} of an \textit{Archival Item}. When the version of a \textit{Text} has survived through fragments, one of the fragmented version's \textit{Witnesses} can relate to another fragment through the attribute ``is preceded by.'' An example of this inter-\textit{Witness} relationship is demonstrated in the case of the \textit{Chanson d'Aspremont} and the Table \ref{tab:CampsAspremont}. Finally, a \textit{Witness} can have formerly been contained in a document which has not survived but to whose historical existence scholars attest based on philological and codicological evidence.
 
-Finally, and again optionally, a \textit{Witness} can have formerly been contained in a document which has not survived but to whose historical existence scholars attest based on philological and codicological evidence. The latter document is the entity \textit{Attested Document} and it receives a relationship from one or more \textit{Witnesses} that it is alleged to have transmitted together. The \textit{Attested Document} can also have contained a lost \textit{Attested Witness}. As sometimes mentioned in archival catalogues, an extant \textit{Witness} might have been modeled on a presumed version of a \textit{Text} that has since been lost, an \textit{Attested Witness}. As such, a \textit{Witness} can have a relationship to an \textit{Attested Witness}.
+\textit{Pages} represents an uninterrupted set of folios and, when digitized, images of an \textit{Archival Item} on which the text content of a \textit{Witness} can be read. In our data model, a \textit{Pages} entity, which depends on an extant \textit{Witness}, must be contained in an \textit{Archival Item}. The \textit{Archival Item} can relate to multiple \textit{Pages} entities. However, the first folio of one \textit{Pages} entity must not come before the last folio of another \textit{Pages} entity in the same \textit{Archival Item}. In other words, \textit{Pages} entities cannot overlap. They represent a unique set of leafs or pages in an \textit{Archival Item}, and they present the content of only one \textit{Witness}. Lastly, the \textit{Archival Item}, being an object one can consult and which continues to persist, contrary to the \textit{Attested Document}, must be conserved in a \textit{Repository}.
 
-\textit{Pages} represents an uninterrupted set of pages and, when digitized, images of an \textit{Archival Item} on which the text content of a \textit{Witness} can be read. In our data model, a \textit{Pages} entity, which depends on an extant \textit{Witness}, must be contained in an \textit{Archival Item}. The \textit{Archival Item} can relate to multiple \textit{Pages} entities. However, the first folio of one \textit{Pages} entity must not come before the last folio of another \textit{Pages} entity in the same \textit{Archival Item}. In other words, \textit{Pages} entities cannot overlap. They represent a unique set of leafs or pages in an \textit{Archival Item}, and they present the content of only one \textit{Witness}. Lastly, the \textit{Archival Item}, being an object one can consult and which continues to persist, contrary to the \textit{Attested Document}, must be conserved in a \textit{Repository}.
+\subsubsection{Genealogy of a \textit{Text}}
 
-% \subsection{Entity-relationship diagram}
-% \label{sec:ERDiagram}
+While the proposed data model manages metadata about intertextuality within the corpus, its relational framework does not register how \textit{Witnesses} derive from one another. This choice reflects an assumption about intertextuality, meaning \textit{Works'} and \textit{Texts'} models, and stemma, meaning \textit{Witness'} models. On the one hand, we assume a relatively consistent consensus has been reached on the models of \textit{Works} and \textit{Texts}. We presume scholars and archivists have largely accepted as historical fact the assertion that one \textit{Text} is a translation of another \textit{Text}, that a \textit{Work} is a compilation of other \textit{Works}, that one \textit{Text} is the prose version of another \textit{Text}, and so on. Through analyses of the content and literary form of extant \textit{Witnesses} that are examples of \textit{Texts} and \textit{Works}, such claims of genealogy and intertextuality tend not to attract as much skepticism and doubt as claims of genealogy amongst \textit{Witnesses}.
 
-% \begin{figure}[ht]
-%     \begin{center}
-%         \input{sections/figures/erdiagram.tex}
-%     \end{center}
-% \label{fig:AllER}
-% \caption{Entities, their foreign key (FK) relationships, and cardinality.}
-% \end{figure}
+What we do not assume is that there is consenus on what \textit{Witness} was used as the model for another \textit{Witness}. Such philological claims are crucial, and we do want to model them. However, in addition to establishing a relationship between two \textit{Witness} entities, it is also critical to cite the source of that attested dependence. Furthermore, we want to permit conflicting stemma. While it is possible to model such connections in a relational framework, exploiting those connections to respond to users' queries risks becoming so complicated that it exceeds the ease of using one framework. Rather than reinvent the wheel and model stemma in a complex relational framework, we propose organizing this information in a graph framework, as philologists have done for decades.\footcite[][]{Zundert2020}
+
+Thus, we propose a relational framework to generate entities relevant to our corpus, store metadata about them, and establish intertextual relations at the level of the abstract, narrative content, meaning the \textit{Work} and \textit{Text}. In conjunction with this relational database, we propose a related graph database. The latter's \textit{Witness} nodes will bear the same identifier and thus can be enriched with the metadata of the \textit{Witness} in the relational database. The graph database can be used independently or, as we envision, a means of enriching entities in the relational framework.
+
+\subsubsection{Reconciling and citing records}
+
+\textit{Reference}, the final entity we propose in our data model, associates certain entities with bibliographic resources. This final entity functions as a kind of reference table that serves two purposes. First, it associates an entity with a unique identifier in an authoritative aggregator, such as WikiData, Biblissima, and VIAF (Virtual International Authority File). This association helps reconcile potentially duplicate records in the data model. Second, it associates entities with scholarly citations. In addition to making the data model interoperable with other databases, such as VIAF, the \textit{Reference} entity also allows us to enrich records with a bibliography.
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/figures/proposed-entities-reference.tex}
+    \end{center}
+\caption{Proposed Entities with \textit{Reference} table.}
+\label{fig:ProposedEntitiesReference}
+\end{figure}
+
+\textit{Reference} is used to reconcile \textit{Cycle}, \textit{Work}, \textit{Text}, \textit{Person}, and \textit{Archival Item}. The latter should ideally have an Archival Resource Key provided by its \textit{Repository} that should help avoid duplicate records of the same manuscript. The other entities linked to \textit{Reference} can have a reference in the VIFA database. For example, the \textit{Work} \textit{Renaut de Montauban} has the VIAF identifier \href{http://viaf.org/viaf/174185484}{\texttt{174185484}}. By linking a \textit{Work} record for \textit{Renaut de Montauban} to a \textit{Reference} record, which associates \textit{Renaut de Montauban} with its VIAF reference, we can enrich the \textit{Work} with all the linked data available in the VIAF database. Furthermore, while our record for \textit{Renaut de Montauban} has one title, its link to the VIAF database via the \textit{Reference} entity associates the \textit{Work} with other names by which people might identify it, including \textit{Renaud de Montauban}, \textit{Reinolt von Montelban}, and \textit{Quatre fils Aymon}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -68,7 +76,7 @@ Definition: Content of a story, which has a recognizable structure and can be re
 \begin{itemize}
     \item \texttt{title} (text, req., uniq.): Received name of the \textit{Work}, either in the language of the first known \textit{Text} to treat the matter or in the language most used in scholarship.
     \item \texttt{is part of} (foreign key, \textbf{Cycle}, opt., uniq.): The \textit{Cycle}, of which the \textit{Work} is a part.
-    \item \texttt{is modeled on} (foreign key, \textbf{Work}, opt., uniq.): If a reworking of an anterior \textit{Work}, the \textit{Work} on which it is modeled.
+    \item \texttt{is modeled on} (foreign key, \textbf{Work}, opt., repeat.): If a reworking of an anterior \textit{Work}, the \textit{Work} on which it is modeled.
 \end{itemize}
 
 
@@ -94,28 +102,32 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
     \item \texttt{title} (text, req., uniq.): Either the given title of the \textit{Text}, as provided by the creator, or the standardized title most used in scholarship to refer to the \textit{Text}.
     \item \texttt{person creator} (foreign key [\textbf{Person}], opt., repeat.): The individual accredited with composing the \textit{Text}.
     \item \texttt{person translator} (foreign key [\textbf{Person}], opt., repeat.): When the \textit{Text} is a translation of another \textit{Text}, the individual accredited with creating the translation.
-    \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Text's} creation, and the second date is the latest date associated with the creation.
+    \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Text's} creation, and, in the case of a range, the second date is the latest date associated with the creation.
     \item \texttt{creation date text} (text, opt., uniq.): The date associated with the \textit{Text's} creation as it is written in a scholarly source.
     \item \texttt{creation date cite} (text, opt., uniq.): A citation of the source that provided the date of creation.
     \item \texttt{matter} (terms, opt., repeat.): The matter treated in the \textit{Text}, as defined by Jean Bodel.
     \begin{itemize}
-        \item \texttt{Breton}: Matter of Breton, which includes stories about Tristan and King Arthur.
+        \item \texttt{Britain}: Matter of Britain, which includes stories about Tristan and King Arthur.
         \item \texttt{France}: Matter of France, which includes stories about Charlemagne.
         \item \texttt{Rome}: Matter of Rome, which includes stories about Troy, Rome, Alexander, and antiquity.
     \end{itemize}
     \item \texttt{regional genre} (terms, req., uniq.): Literary genre attributed to the \textit{Text}.
-    \begin{multicols}{2}
         \begin{itemize}
             \item Relevant to French tradition
                 \begin{itemize}
-                    \item \texttt{chanson de geste}\footcite[][]{Comfort1904}
+                    \item \texttt{chanson de geste}\footcite[][]{Comfort1904}: Epic poem (i.e. \textit{Girartz de Rossilho})
                     \item \texttt{roman}\footcite[][]{Comfort1904}
                 \end{itemize}
-            \item Relevant to Middle Dutch tradition
-                \begin{itemize}
-                    \item \texttt{ridderepiek}\footcite[][]{kienhorst1988handschriften}
-                    \item \texttt{ridderroman}
-                \end{itemize}
+            \item Relevant to Iberian tradition
+            \begin{itemize}
+                \item \texttt{romancero}: Epic poem (i.e. \textit{Cantar de mio Cid})
+                \item \texttt{novela}: Epic romance.
+            \end{itemize}
+            \item Relevant to Italian tradition
+            \begin{itemize}
+                \item \href{https://www.oxfordbibliographies.com/display/document/obo-9780195396584/obo-9780195396584-0199.xml}{\texttt{cantare}}
+                \item \texttt{poema cavalleresche}
+            \end{itemize}
             \item Relevant to Islandic tradition
                 \begin{itemize}
                     \item \texttt{fornaldarsögur}
@@ -124,52 +136,49 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
                     \item \texttt{fornaldarrímur}
                     \item \texttt{riddararímur}
                 \end{itemize}
-            \item Relevant to Iberian tradition
-            \item Relevant to Middle Irish tradition
-            \item Relevant to Middle English tradition
-            \item Relevant to Middle Welsh tradition
-            \item Relevant to Middle High German tradition
-            \item Relevant to Italian tradition
+            \item Relevant to Middle Dutch tradition
+                \begin{itemize}
+                    \item \texttt{ridderepiek}\footcite[][]{Besamusca2011}: Chivalric epic (i.e. \textit{Roman van Moriaen})
+                    \item \texttt{ridderroman}\footcite[][]{Oostrom2005}: Chivalric romance (i.e. \textit{Arthurs doet})
+                    \item \texttt{rijmkronieken}: Rhyming chronicle (i.e. \textit{Brabantsche Yeesten})
+                \end{itemize}
+            \item Relevant to Middle English, Middle Irish, Middle Welsh traditions
             \begin{itemize}
-                \item \href{https://www.oxfordbibliographies.com/display/document/obo-9780195396584/obo-9780195396584-0199.xml}{\texttt{cantare}}
-                \item \texttt{poema cavalleresche}
+                \item \texttt{romance}
+            \end{itemize}
+            \item Relevant to Middle High German tradition
+            \begin{itemize}
+                \item \texttt{Roman}
+                \item \texttt{Spielmannsdichtung}\footcite[][]{Spielmannsdichtung}
             \end{itemize}
         \end{itemize}
-    \end{multicols}
     \item \texttt{language} (terms, req., uniq.): ISO code of the primary language through which the \textit{Text} expresses the \textit{Work}.
     \begin{multicols}{2}
         \begin{itemize}
-            \item \texttt{ang}: Old English (ca. 450-1100)
             \item \texttt{cat}: Catalan
             \item \texttt{dum}: Middle Dutch
             \item \texttt{enm}: Middle English (1100-1500)
-            \item \texttt{frk}: Frankish
             \item \texttt{frm}: Middle French (ca. 1400-1600)
             \item \texttt{fro}: Old French (842-ca. 1400)
-            \item \texttt{fro\_ENG}: Old French in English dialect
-            \item \texttt{fro\_ITA}: Old French in Italian dialect
-            \item \texttt{fro\_PRO}: Medieval French in Provençal dialect
+            \item \href{https://www.wikidata.org/wiki/Q54879035}{\texttt{fro\_ITA}}: Franco-Italian
+            \item \texttt{fro\_PRO}: Franco-Occitan
             \item \texttt{ghg}: Hiberno-Scottish Gaelic, Early Modern Irish
             \item \texttt{glg}: Galician
-            \item \texttt{glg\_POR}: Galician in Portugese dialect
+            \item \href{https://www.wikidata.org/wiki/Q1072111}{\texttt{glg\_POR}}: Galician-Portugese
             \item \texttt{gmh}: Middle High German (ca. 1050-1500)
             \item \texttt{gml}: Middle Low German
-            \item \texttt{goh}: Old High German (750-1050)
             \item \texttt{isl}: Islandic
             \item \texttt{ita}: Italian
             \item \texttt{mga}: Middle Irish (900-1200)
             \item \texttt{non}: Old Norse
-            \item \texttt{non\_DAN}: East Norse, Old Danish
-            \item \texttt{non\_SWE}: West Norse, Old Swedish
+            \item \href{https://www.wikidata.org/wiki/Q12330003}{\texttt{non\_DAN}}: Old East Norse, Old Danish (800-1100)
+            \item \href{https://www.wikidata.org/wiki/Q2417210}{\texttt{non\_SWE}}: Old Swedish (800-1500)
             \item \texttt{oco}: Old Cornish
-            \item \texttt{odt}: Old Dutch
-            \item \texttt{owl}: Old Welsh
             \item \texttt{por}: Portugese
             \item \texttt{pro}: Old Occitan, Old Provençal (to 1500)
             \item \texttt{spa}: Spanish or Castilian
-            \item \texttt{sga}: Old Irish (to 900)
             \item \texttt{wlm}: Middle Welsh
-            \item \texttt{xno}: Anglo-Norman
+            \item \href{https://data.biblissima.fr/w/Item:Q286307}{\texttt{xno}}: Anglo-French, Anglo-Norman
         \end{itemize}
     \end{multicols}
     \item \texttt{form} (terms, req., uniq.): Whether the \textit{Text} is formed in prose, verse, or a mix of both.
@@ -181,23 +190,24 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
         \end{itemize}
     \end{multicols}
     \item \texttt{poetic meter} (terms, opt., uniq.): If the \textit{Text} is in verse, the type of poetic meter.
-    \begin{multicols}{4}
         \begin{itemize}
-            \item \texttt{alexandrines}
-            \item \texttt{decasyllables}
-            \item \texttt{hexasyllables}
-            \item \texttt{octosyllables}
+            \item \texttt{French alexandrine}: line consisting of 2 half-lines each of 6 syllables, total of 12 syllables.
+            \item \texttt{dodecasyllabe}: line consisting of 12 syllables.
+            \item \texttt{decasyllabe}: line consisting of 10 syllables.
+            \item \texttt{octosyllabe}: line consisting of 8 syllables.
+            \item \texttt{hexasyllabe}: line consisting of 6 syllables.
+            \item \texttt{pentasyllabe}: line consisting of 5 syllables.
         \end{itemize}
-    \end{multicols}
-    \item \texttt{stanza length} (integer, opt., uniq.): If the \textit{Text} is in verse, the typical length of a stanza.\footnote{For example, in the Islandic tradition, \textit{Texts} that are of the \textit{ferskeytla} form are in four-line stanzas, \textit{braghenda} is in three lines, and the \textit{afhending} form is defined by the fact that they have two-line stanzas.}
+    \item \texttt{rhyme type} (terms, opt., repeat.): If the \textit{Text} is in verse, the types of rhyme used.
+        \begin{itemize}
+            \item \texttt{alliteration}: Rhyme is allowed between words that either start with the same consonant sound or with the same vowel, such as ``\textit{With floures fele, fair under fete}'' in Middle English.\footcite[][396]{Davis2002}
+            \item \texttt{assonance}: Rhyme is allowed between words that have a repeated vowel sound, such as ``a'' in ``\textit{Vio puertas abiertas e uços sin cañados / alcandaras vazias sin pielles e sin mantos}'' in Castilian.\footcite[][364]{Gornall1995}
+            \item \texttt{end-rhyme}: Rhyme is allowed between words that have an ending that sounds the same, such as ``\textit{ihesu guz son ihesu goþe / bløt mit hiærta mæþ þino bloþe}'' in Old Norse.\footcite[][423]{Layher2008}
+            \item \texttt{generic}: ``[R]hyme is allowed between any one member of a phonetic group and is itself or any other member of the same group,'' such as `b,' `g,' `d' in Old Irish.\footcite[][822]{McKie1997}
+        \end{itemize}
+    \item \texttt{strophe count} (integer, opt., uniq.): If the \textit{Text} is in verse and strophic, the number of strophes.
+    \item \texttt{strophe length} (integer, opt., uniq.): If the \textit{Text} is in verse and strophic, the number of lines in each strophe.
     \item \texttt{verse length} (integer, opt., uniq.): If the \textit{Text} is in verse, the number of verses a complete version (\textit{Witness}) of it should have.
-    \item \texttt{rhyme perfection} (terms, opt., uniq.): If the \textit{Text} is in verse, whether the rhyme is perfect or imperfect (assonance).
-    \begin{multicols}{4}
-        \begin{itemize}
-            \item \texttt{perfect rhyme}
-            \item \texttt{assonance}
-        \end{itemize}
-    \end{multicols}
 \end{itemize}
 
 \begin{figure}[ht]
@@ -212,15 +222,13 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
 
 \subsection{Person}
 
-Definition: 
+Definition: An individual bearing some responsibility for a \textit{Text} in the data set, either as a creator/author or as a translator, in the case of a \textit{Text} that is the translation of a model \textit{Text} in another language.
 
 \vspace{1em}
 \noindent Attributes:
 \begin{itemize}
-    \item \texttt{name}
-    \item \texttt{birth year}
-    \item \texttt{death year}
-    \item \texttt{location}
+    \item \texttt{name} (text, req., uniq.): The recieved name of the individual.
+    \item \texttt{note} (text, opt., uniq.): Optional notes to help identify the individual.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -235,10 +243,28 @@ Definition:
 
 \subsection{Witness}
 
-Definition: 
+Definition: An extant manifestation of a \textit{Text} in a defined sequence of characters, which have been inscribed on a physical document.
 
 \vspace{1em}
 \noindent Attributes:
+\begin{itemize}
+    \item \texttt{is manifestation of} (foreign key [\textbf{Text}], req., uniq.): The \textit{Text} whose linguistic content the \textit{Witness} manifests in writing.
+    \item \texttt{is preceded by} (foreign key [\textbf{Witness}], opt., uniq.): If the \textit{Witness} is a fragment, reference to another \textit{Witness} fragment, with which the \textit{Witness} is thought to have been produced in an original document, and which presents an earlier part of the \textit{Text} than its own part.
+    \item \texttt{was contained in} (foreign key [\textbf{Attested Document}]): 
+    \item \texttt{siglum} (text, opt., repeat.): Identifier used by scholars to indicate the extant \textit{Witness} within the \textit{Text's} tradition.
+    \item \texttt{status} (terms, req., uniq.): Status of the extant \textit{Witness}.
+    \begin{itemize}
+        \item \texttt{complete}: All pages containing the main textual content of the \textit{Witness}, excluding dedications and decorations, have survived.
+        \item \texttt{mutilated}: The \textit{Witness} presents parts of its \textit{Text} on a set of surviving pages ($ \geq 3 $ pages).
+        \item \texttt{fragment}: Only a few pages of the \textit{Witness} survive ($ \leq 2 $ pages). 
+        \item \texttt{citation}: The \textit{Witness} testifies to the existence of a \textit{Text}, through citation, but does not present all of the latter's linguistic content.
+    \end{itemize}
+    \item \texttt{TEI document} (text, opt., uniq.): Reference to a TEI-XML file representing the text content of the \textit{Witness}.
+    \item \texttt{scribe} (text, opt., uniq.): When known, identifying information about the scribe alleged to have written the text version.
+    \item \texttt{scripta} (terms, opt., uniq.): When known, the name of a regional writing style, defined by its consistent variances in spelling and form similar to how spoken dialects are distinguished.
+    \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Witness's} production, and, in the case of a range, the second date is the latest date associated with the production.
+    \item \texttt{creation date text} (text, opt., uniq.): The date associated with the \textit{Witness's} production as it is written in a catalogue or other scholarly source.
+\end{itemize}
 
 \begin{figure}[ht]
     \begin{center}
