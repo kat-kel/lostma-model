@@ -24,15 +24,27 @@ Stemming from an extant \textit{Witness} are potentially four types of relations
 
 \subsubsection{Genealogy of a \textit{Text}}
 
-While the proposed data model manages metadata about intertextuality within the corpus, its relational framework does not register how \textit{Witnesses} derive from one another. This choice reflects an assumption about intertextuality, meaning \textit{Works'} and \textit{Texts'} models, and stemma, meaning \textit{Witness'} models. On the one hand, we assume a relatively consistent consensus has been reached on the models of \textit{Works} and \textit{Texts}. We presume scholars and archivists have largely accepted as historical fact the assertion that one \textit{Text} is a translation of another \textit{Text}, that a \textit{Work} is a compilation of other \textit{Works}, that one \textit{Text} is the prose version of another \textit{Text}, and so on. Through analyses of the content and literary form of extant \textit{Witnesses} that are examples of \textit{Texts} and \textit{Works}, such claims of genealogy and intertextuality tend not to attract as much skepticism and doubt as claims of genealogy amongst \textit{Witnesses}.
+While the proposed data model manages metadata about intertextuality within the corpus, its relational framework does not register how \textit{Witnesses} derive from one another. This choice reflects an assumption about intertextuality, meaning \textit{Works'} and \textit{Texts'} models, and stemma, meaning \textit{Witness'} models. On the one hand, we assume a relatively consistent consensus has been reached on the models of \textit{Works} and \textit{Texts}. We presume scholars and archivists have largely accepted as historical fact the assertion that one \textit{Text} is a translation of another \textit{Text}, that a \textit{Work} is a compilation of other \textit{Works}, that one \textit{Text} is the prose version of another \textit{Text}, and so on. Through analyses of the content and literary form of extant \textit{Witnesses} that are examples of \textit{Texts} and \textit{Works}, such claims of genealogy and intertextuality tend not to attract as much skepticism as claims about \textit{Witnesses} of a \textit{Text}. Scholars posit hypotheses that the scribes who arranged the spelling, phrasing, and formatting of one \textit{Witness} derived their version (Sahle's text-as-version) from another \textit{Witness}.
 
-What we do not assume is that there is consenus on what \textit{Witness} was used as the model for another \textit{Witness}. Such philological claims are crucial, and we do want to model them. However, in addition to establishing a relationship between two \textit{Witness} entities, it is also critical to cite the source of that attested dependence. Furthermore, we want to permit conflicting stemma. While it is possible to model such connections in a relational framework, exploiting those connections to respond to users' queries risks becoming so complicated that it exceeds the ease of using one framework. Rather than reinvent the wheel and model stemma in a complex relational framework, we propose organizing this information in a graph framework, as philologists have done for decades.\footcite[][]{Zundert2020}
+Such stemmatological claims are crucial, and we want to model them for the corpus. However, in addition to establishing a relationship between two \textit{Witness} entities, it is also critical to cite the source of that attested dependence. Furthermore, we want to permit conflicting stemma without over complicating the model's relationships. While it is possible to model such connections in a relational framework, exploiting those connections to respond to users' queries risks pushing the model to become over complex. The choice becomes one between exploting one over-complicated model or harmonizing and jointly exploiting two simpler models.
 
-Thus, we propose a relational framework to generate entities relevant to our corpus, store metadata about them, and establish intertextual relations at the level of the abstract, narrative content, meaning the \textit{Work} and \textit{Text}. In conjunction with this relational database, we propose a related graph database. The latter's \textit{Witness} nodes will bear the same identifier and thus can be enriched with the metadata of the \textit{Witness} in the relational database. The graph database can be used independently or, as we envision, a means of enriching entities in the relational framework.
+Rather than reinvent the wheel and model stemma in a complex relational framework, we propose pairing the former with a graph framework, which philologists have used for decades.\footcite[][]{Zundert2020} The relational framework's main tasks are, therefore, to generate entities relevant to our corpus, store metadata about them, and establish intertextual relations at the level of the abstract, narrative content, meaning the \textit{Work} and \textit{Text}. In conjunction, the graph database's \textit{Witness} nodes will bear the same identifier as their counterpart in the relational database and thus can be enriched with metadata.
+
+The project \textit{OpenStemmata} has already designed a workflow through which contributors can encode stemma that have been published in a scholarly context or otherwise submitted by scholars. For example, Giovanni Palumbo and Paolo Rinoldi, who, while developing a critical edition of the French \textit{Chanson d'Aspremont}, produced a stemma of the first part of the \textit{Text}. Their stemma was encoded and uploaded to the \textit{OpenStemmata} database, and we have represented it here in Figure \ref{fig:GraphFramework}. The graph's gray node P\textsubscript{4} is equivalent to the \textit{Witness} P\textsubscript{4} in our earlier \textit{Chanson d'Aspremont} test case, as seen in Figures \ref{fig:BNFNAF5094}, \ref{fig:AspremontCFBNF}, and \ref{fig:WitnessRelations}.
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/figures/graph.tex}
+    \end{center}
+\caption{Stemma of extant \textit{Witnesses} (gray) and supposed witnesses (white) of the first part of the French \textit{Chanson d'Aspremont} by G. Palumbo and P. Rinoldi.}
+\label{fig:GraphFramework}
+\end{figure}
+
+We propose outsourcing the data model's \textit{Text} genealogies to the \textit{OpenStemmata} project's established workflow, encoding standards, and open-source repository. Subsequently, we reconcile the \textit{Witness} nodes in the \textit{OpenStemmata} database, further valorizing and enriching those publications, with records registered in our proposed relational data model. Finally, having linked the two record types, such as the \textit{Witness} P\textsubscript{4} of the Anglo-Norman \textit{Chanson d'Aspremont}, the data model can deliver thoroughly enriched and linked records based on users' requests.
 
 \subsubsection{Reconciling and citing records}
 
-\textit{Reference}, the final entity we propose in our data model, associates certain entities with bibliographic resources. This final entity functions as a kind of reference table that serves two purposes. First, it associates an entity with a unique identifier in an authoritative aggregator, such as WikiData, Biblissima, and VIAF (Virtual International Authority File). This association helps reconcile potentially duplicate records in the data model. Second, it associates entities with scholarly citations. In addition to making the data model interoperable with other databases, such as VIAF, the \textit{Reference} entity also allows us to enrich records with a bibliography.
+Finally, we propose a \textit{Reference} table, which associates certain entities with bibliographic resources. This last addition serves two purposes. First, it associates an entity with a unique identifier in an authoritative aggregator, such as WikiData, Biblissima, and VIAF (Virtual International Authority File). This association helps reconcile potentially duplicate records in the data model and helps reconcile records between the relational data model and an \textit{OpenStemmata} graph. Second, \textit{Reference} associates entities with scholarly citations. In addition to making the data model interoperable with other databases, including VIAF, the \textit{Reference} entity also allows us to enrich records with a scholarly bibliography.
 
 \begin{figure}[ht]
     \begin{center}
@@ -42,7 +54,58 @@ Thus, we propose a relational framework to generate entities relevant to our cor
 \label{fig:ProposedEntitiesReference}
 \end{figure}
 
-\textit{Reference} is used to reconcile \textit{Cycle}, \textit{Work}, \textit{Text}, \textit{Person}, and \textit{Archival Item}. The latter should ideally have an Archival Resource Key provided by its \textit{Repository} that should help avoid duplicate records of the same manuscript. The other entities linked to \textit{Reference} can have a reference in the VIFA database. For example, the \textit{Work} \textit{Renaut de Montauban} has the VIAF identifier \href{http://viaf.org/viaf/174185484}{\texttt{174185484}}. By linking a \textit{Work} record for \textit{Renaut de Montauban} to a \textit{Reference} record, which associates \textit{Renaut de Montauban} with its VIAF reference, we can enrich the \textit{Work} with all the linked data available in the VIAF database. Furthermore, while our record for \textit{Renaut de Montauban} has one title, its link to the VIAF database via the \textit{Reference} entity associates the \textit{Work} with other names by which people might identify it, including \textit{Renaud de Montauban}, \textit{Reinolt von Montelban}, and \textit{Quatre fils Aymon}.
+\textit{Reference} can reconcile conflicting \textit{Cycle}, \textit{Work}, \textit{Text}, \textit{Person}, and \textit{Archival Item} entities and link them to universal unique identifiers. The \textit{Archival Item} entity should ideally have an Archival Resource Key provided by its \textit{Repository}, which should help avoid duplicate records of the same manuscript. The entities \textit{Cycle}, \textit{Work}, and \textit{Person} have overlap with entities in the VIAF database; our model's \textit{Person} is equivalent to VIAF's \textit{Personal Names} and our model's \textit{Cycle}, \textit{Work}, \textit{Text} records can find equivalent under VIAF's \textit{Work} and \textit{Expression} records. The latter two entities in the VIAF model are borrowed from the FRBR.
+
+For example, the \textit{Work} \textit{Renaut de Montauban}, seen in Table \ref{sub:Work}, has the VIAF identifier {\texttt{174185484}}, as seen in the last row of Table \ref{sub:Reference}. By linking a \textit{Work} record to a \textit{Reference} record, which in this case associates \textit{Renaut de Montauban} with an identifier in the VIAF database, we can enrich the \textit{Work} with all the linked data available in VIAF. Furthermore, while our record for \textit{Renaut de Montauban} has one title, its link to the VIAF database via the \textit{Reference} entity associates the \textit{Work} with other names by which people might identify it, including \textit{Renaud de Montauban}, \textit{Reinolt von Montelban}, and \textit{Quatre fils Aymon}, further improving the data's interoperability and resilience against duplication.
+
+\begin{figure}[ht]
+
+    \begin{subfigure}{\textwidth}
+        \begin{center}
+        \begin{tabular}{|p{0.05\textwidth}|p{0.2\textwidth}|p{0.1\textwidth}|}
+            \hline
+            \textbf{ID} & \textbf{title} & \textbf{is part of} \\ \hline
+            1 & Renaut de Montauban & \\ \hline
+        \end{tabular}
+        \end{center}
+    \subcaption{\textit{Cycle} record for \textit{Renaut de Montauban}.}
+    \label{sub:Cycle}
+    \vspace*{1em}
+    \end{subfigure}
+
+    \begin{subfigure}{\textwidth}
+        \begin{center}
+        \begin{tabular}{|p{0.05\textwidth}|p{0.2\textwidth}|p{0.1\textwidth}|p{0.15\textwidth}|}
+            \hline
+            \textbf{ID} & \textbf{title} & \textbf{is part of} & \textbf{is modeled on} \\ \hline
+            2 & Renaut de Montauban & 1 & \\ \hline
+        \end{tabular}
+        \end{center}
+    \subcaption{\textit{Work} record for \textit{Renaut de Montauban}.}
+    \label{sub:Work}
+    \vspace*{1em}
+    \end{subfigure}
+
+    \begin{subfigure}{\textwidth}
+        \begin{center}
+        \begin{tabular}{|p{0.05\textwidth}|p{0.05\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|p{0.2\textwidth}|p{0.3\textwidth}|}
+            \hline
+            \textbf{entity type} & \textbf{entity ID} & \textbf{unique identifier} & \textbf{identifier source} & \textbf{permalink} & \textbf{citation} \\ \hline
+            Cycle & 1 & & & & \cite{Augustine2020} \\ \hline
+            Cycle & 1 & 5045 & Arlima & \url{https://arlima.net/no/5045} & \\ \hline
+            Cycle & 1 & Q59212800 & WikiData & \url{https://www.wikidata.org/wiki/Q59212800} & \\ \hline
+            Work & 2 & 318 & Arlima & \url{https://arlima.net/no/318} & \\ \hline
+            Work & 2 & Q115962675 & WikiData & \url{https://www.wikidata.org/wiki/Q115962675} & \\ \hline
+            Work & 2 & 174185484 & VIAF & \url{http://viaf.org/viaf/174185484} & \\ \hline
+        \end{tabular}
+        \end{center}
+    \subcaption{\textit{Reference} records for \textit{Renaut de Montauban}.}
+    \vspace*{1em}
+    \label{sub:Reference}
+    \end{subfigure}
+
+\label{tab:ReferenceRenaut}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
