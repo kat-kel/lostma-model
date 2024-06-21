@@ -10,14 +10,17 @@
   \hline
   is manifestation of\\
   is preceded by\\
+  is visible on\\
   was contained in\\
   siglum \\
   status \\
   TEI document\\
+  IIIF manifest\\
   scribe\\
   scripta\\
   creation date\\
   creation date text\\
+  note\\
 }
 }};
 
@@ -29,8 +32,8 @@
   is expression of \\
   is modeled on \\
   title \\
-  person creator \\
-  person translator \\
+  is written by \\
+  is translated by \\
   creation date \\
   creation date text \\
   creation date cite \\
@@ -39,9 +42,10 @@
   language\\
   form\\
   poetic meter\\
-  stanza length \\
+  rhyme type \\
+  strophe count \\
+  strophe length \\
   verse length \\
-  rhyme perfection\\
 }
 }};
 
@@ -50,22 +54,47 @@
   {
     \textbf{ID} \\
     \hline
-    title \\
-    is example of \\
-    siglum \\
-    siglum source \\
-    status \\
-    scribe \\
-    scripta \\
+    is contained in \\
+    archival item part \\
+    witness part no \\
+    folio start \\
+    folio end \\
+    image start \\
+    image end \\
   }
 }};
 
-\draw[one-omany] (text) -- node[label,above]{Witness is instance} (witness);
+\pic [above = 7em of witness] { entityassociative = {{reference}
+{\textbf{Reference}}
+{
+  entity type\\
+  entity ID \\
+  unique identifier \\
+  identifier source \\
+  permalink\\
+  citation \\
+}
+}};
+
+\pic [below = 5em of witness] { entityassociative = {{document}
+{\textbf{Attested Document}}
+{
+  \textbf{ID} \\
+  \hline
+  name\\
+  creation date\\
+  creation date text\\
+}
+}};
+
+\draw[omany-omany] (reference) -- node[label, pos=0.5, right]{Witness has 0, 1, or many References} (witness);
+
+\draw[one-omany] (text) -- node[label,above]{Witness is manifestation} (witness);
 \draw[one-omany] (text) -- node[label,below]{of 1 and only 1 Text} (witness);
 
 \draw[one-many] (witness) --node[label, above]{Witness is visible on} (pages);
 \draw[one-many] (witness) --node[label, below]{1 or many Pages} (pages);
 
-
+\draw[omany-omany] (document) -- node[label, pos=0.5, right]{Witness was contained in 0, 1, or many Attested Documents} (witness);
 
 \end{tikzpicture}

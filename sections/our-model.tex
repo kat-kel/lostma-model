@@ -163,8 +163,8 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
     \item \texttt{is expression of} (foreign key [\textbf{Work}], req., uniq.): The \textit{Work} that the \textit{Text} articulates.
     \item \texttt{is modeled on} (foreign key, [\textbf{Text}], opt., uniq.): If the \textit{Text} is derived from another \textit{Text}, a reference to the model \textit{Text}.
     \item \texttt{title} (text, req., uniq.): Either the given title of the \textit{Text}, as provided by the creator, or the standardized title most used in scholarship to refer to the \textit{Text}.
-    \item \texttt{person creator} (foreign key [\textbf{Person}], opt., repeat.): The individual accredited with composing the \textit{Text}.
-    \item \texttt{person translator} (foreign key [\textbf{Person}], opt., repeat.): When the \textit{Text} is a translation of another \textit{Text}, the individual accredited with creating the translation.
+    \item \texttt{is written by} (foreign key [\textbf{Person}], opt., repeat.): The individual accredited with composing the \textit{Text}.
+    \item \texttt{is translated by} (foreign key [\textbf{Person}], opt., repeat.): When the \textit{Text} is a translation of another \textit{Text}, the individual accredited with creating the translation.
     \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Text's} creation, and, in the case of a range, the second date is the latest date associated with the creation.
     \item \texttt{creation date text} (text, opt., uniq.): The date associated with the \textit{Text's} creation as it is written in a scholarly source.
     \item \texttt{creation date cite} (text, opt., uniq.): A citation of the source that provided the date of creation.
@@ -175,16 +175,17 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
         \item \texttt{Rome}: Matter of Rome, which includes stories about Troy, Rome, Alexander, and antiquity.
     \end{itemize}
     \item \texttt{regional genre} (terms, req., uniq.): Literary genre attributed to the \textit{Text}.
+    \begin{multicols}{2}
         \begin{itemize}
             \item Relevant to French tradition
                 \begin{itemize}
-                    \item \texttt{chanson de geste}\footcite[][]{Comfort1904}: Epic poem (i.e. \textit{Girartz de Rossilho})
-                    \item \texttt{roman}\footcite[][]{Comfort1904}
+                    \item \texttt{chanson de geste}: i.e. \textit{Girartz de Rossilho}
+                    \item \texttt{roman}
                 \end{itemize}
             \item Relevant to Iberian tradition
             \begin{itemize}
-                \item \texttt{romancero}: Epic poem (i.e. \textit{Cantar de mio Cid})
-                \item \texttt{novela}: Epic romance.
+                \item \texttt{romancero}: i.e. \textit{Cantar de mio Cid}
+                \item \texttt{novela}: 
             \end{itemize}
             \item Relevant to Italian tradition
             \begin{itemize}
@@ -201,20 +202,17 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
                 \end{itemize}
             \item Relevant to Middle Dutch tradition
                 \begin{itemize}
-                    \item \texttt{ridderepiek}\footcite[][]{Besamusca2011}: Chivalric epic (i.e. \textit{Roman van Moriaen})
-                    \item \texttt{ridderroman}\footcite[][]{Oostrom2005}: Chivalric romance (i.e. \textit{Arthurs doet})
-                    \item \texttt{rijmkronieken}: Rhyming chronicle (i.e. \textit{Brabantsche Yeesten})
+                    \item \texttt{ridderepiek}: i.e. \textit{Roman van Moriaen}
+                    \item \texttt{ridderroman}: i.e. \textit{Arthurs doet}
+                    \item \texttt{rijmkronieken}: i.e. \textit{Brabantsche Yeesten}
                 \end{itemize}
             \item Relevant to Middle English, Middle Irish, Middle Welsh traditions
             \begin{itemize}
                 \item \texttt{romance}
             \end{itemize}
             \item Relevant to Middle High German tradition
-            \begin{itemize}
-                \item \texttt{Roman}
-                \item \texttt{Spielmannsdichtung}\footcite[][]{Spielmannsdichtung}
-            \end{itemize}
         \end{itemize}
+    \end{multicols}
     \item \texttt{language} (terms, req., uniq.): ISO code of the primary language through which the \textit{Text} expresses the \textit{Work}.
     \begin{multicols}{2}
         \begin{itemize}
@@ -313,7 +311,8 @@ Definition: An extant manifestation of a \textit{Text} in a defined sequence of 
 \begin{itemize}
     \item \texttt{is manifestation of} (foreign key [\textbf{Text}], req., uniq.): The \textit{Text} whose linguistic content the \textit{Witness} manifests in writing.
     \item \texttt{is preceded by} (foreign key [\textbf{Witness}], opt., uniq.): If the \textit{Witness} is a fragment, reference to another \textit{Witness} fragment, with which the \textit{Witness} is thought to have been produced in an original document, and which presents an earlier part of the \textit{Text} than its own part.
-    \item \texttt{was contained in} (foreign key [\textbf{Attested Document}]): 
+    \item \texttt{is visible on} (foreign key [\textbf{Pages}], opt., repeat.): 
+    \item \texttt{was contained in} (foreign key [\textbf{Attested Document}], opt., uniq.): 
     \item \texttt{siglum} (text, opt., repeat.): Identifier used by scholars to indicate the extant \textit{Witness} within the \textit{Text's} tradition.
     \item \texttt{status} (terms, req., uniq.): Status of the extant \textit{Witness}.
     \begin{itemize}
@@ -323,10 +322,12 @@ Definition: An extant manifestation of a \textit{Text} in a defined sequence of 
         \item \texttt{citation}: The \textit{Witness} testifies to the existence of a \textit{Text}, through citation, but does not present all of the latter's linguistic content.
     \end{itemize}
     \item \texttt{TEI document} (text, opt., uniq.): Reference to a TEI-XML file representing the text content of the \textit{Witness}.
+    \item \texttt{IIIF manifest} (text, opt., uniq.): Reference to a IIIF manifest JSON file representing the digitized images of the \textit{Witness's} \textit{Pages}.
     \item \texttt{scribe} (text, opt., uniq.): When known, identifying information about the scribe alleged to have written the text version.
-    \item \texttt{scripta} (terms, opt., uniq.): When known, the name of a regional writing style, defined by its consistent variances in spelling and form similar to how spoken dialects are distinguished.
+    \item \texttt{scripta} (terms, opt., uniq.): When known, the name of a regional writing style, similar to the written version of a spoken dialect, as defined by Louis Remacle.\footcite[``Je désigne la langue vulgaire écrite au moyen âge par le néologisme \textit{scripta}. L'expression `la scripta' est synonyme de l'allemand `die Schriftsprache.'''][24]{Remacle1948}
     \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Witness's} production, and, in the case of a range, the second date is the latest date associated with the production.
     \item \texttt{creation date text} (text, opt., uniq.): The date associated with the \textit{Witness's} production as it is written in a catalogue or other scholarly source.
+    \item \texttt{note} (text, opt., uniq.): Notes about the \textit{Witness} that will not be standardized and used in computational methods but may serve to protect the integrity of the record.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -341,10 +342,19 @@ Definition: An extant manifestation of a \textit{Text} in a defined sequence of 
 
 \subsection{Pages}
 
-Definition: 
+Definition: An uninterrupted series of leafs or pages in an \textit{Archival Item} on which is inscribed the \textit{Witness} of a \textit{Text}.
 
 \vspace{1em}
 \noindent Attributes:
+\begin{itemize}
+    \item \texttt{is contained in}
+    \item \texttt{archival item part}
+    \item \texttt{witness part no}
+    \item \texttt{folio start}
+    \item \texttt{folio end}
+    \item \texttt{image start}
+    \item \texttt{image end}
+\end{itemize}
 
 \begin{figure}[ht]
     \begin{center}

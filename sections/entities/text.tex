@@ -11,8 +11,8 @@
   is expression of \\
   is modeled on \\
   title \\
-  person creator \\
-  person translator \\
+  is written by \\
+  is translated by \\
   creation date \\
   creation date text \\
   creation date cite \\
@@ -28,7 +28,7 @@
 }
 }};
 
-\pic [above = 7em of text, xshift=-12em] { entityassociative = {{work}
+\pic [left = 12em of text] { entityassociative = {{work}
 {\textbf{Work}}
 {
   \textbf{ID} \\
@@ -38,25 +38,28 @@
 }
 }};
 
-\pic [left = 12em of text] { entityassociative = {{witness}
+\pic [right = 12em of text] { entityassociative = {{witness}
 {\textbf{Witness}}
 {
   \textbf{ID} \\
   \hline
   is manifestation of\\
   is preceded by\\
+  is visible on\\
   was contained in\\
   siglum \\
   status \\
   TEI document\\
+  IIIF manifest\\
   scribe\\
   scripta\\
   creation date\\
   creation date text\\
+  note\\
 }
 }};
 
-\pic [above = 7em of text, xshift=12em] { entityassociative = {{person}
+\pic [below = 7em of text] { entityassociative = {{person}
 {\textbf{Person}}
 {
   \textbf{ID} \\
@@ -66,39 +69,25 @@
 }
 }};
 
-\pic [right = 12em of text] { entityassociative = {{attestedWitness}
-{\textbf{Attested Witness}}
-{
-  \textbf{ID} \\
-  \hline
-  name \\
-  is manifestation of \\
-  scribe \\
-  scripta \\
-  note \\
-}
-}};
-
-\pic [below = 7em of text] { entityassociative = {{reference}
+\pic [above = 7em of text] { entityassociative = {{reference}
 {\textbf{Reference}}
 {
   entity type\\
   entity ID \\
   unique identifier \\
   identifier source \\
+  permalink\\
   citation \\
 }
 }};
 
-\draw[omany-omany] (reference) -- node[label, pos=0.5, right]{Cycle has 0, 1, or many References} (text);
-
-\draw[one-many] (work) -- node[label, pos=0.5, left]{Text is expression of 1 and only 1 Work} (text);
+\draw[omany-omany] (reference) -- node[label, pos=0.5, right]{Text has 0, 1, or many References} (text);
 
 \draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in 0, 1, or} (witness);
 \draw[one-omany] (text) -- node[label, below, yshift=-0.10cm]{many Witnesses} (witness);
 
-\draw[one-omany] (text) -- node[label, above, yshift=0.10cm]{Text is manifest in 0, 1, or} (attestedWitness);
-\draw[one-omany] (text) -- node[label, below, yshift=-0.10cm]{many Attested Witnesses} (attestedWitness);
+\draw[one-many] (text) -- node[label, above, yshift=0.10cm]{Text is expression of} (work);
+\draw[one-many] (text) -- node[label, below, yshift=-0.10cm]{1 and only 1 Work} (work);
 
 \draw[omany-omany] (text) -- node[label, pos=0.40, right]{Text is written by 0, 1, or many Persons} (person);
 \draw[omany-omany] (text) -- node[label, pos=0.60, right]{Text is translated by 0, 1, or many Persons} (person);
