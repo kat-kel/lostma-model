@@ -56,7 +56,7 @@
     \hline
     is contained in \\
     archival item part \\
-    witness part no \\
+    witness part \\
     folio start \\
     folio end \\
     image start \\
@@ -95,6 +95,6 @@
 \draw[one-many] (witness) --node[label, above]{Witness is visible on} (pages);
 \draw[one-many] (witness) --node[label, below]{1 or many Pages} (pages);
 
-\draw[omany-omany] (document) -- node[label, pos=0.5, right]{Witness was contained in 0, 1, or many Attested Documents} (witness);
+\draw[omany-many] (document) -- node[label, pos=0.5, right]{Witness was contained in 0, 1, or many Attested Documents} (witness);
 
 \end{tikzpicture}

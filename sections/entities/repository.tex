@@ -3,64 +3,38 @@
 \begin{tikzpicture}[-,shorten >=1pt,auto,node distance=1.5cm,semithick]
 \tikzstyle{every state}=[fill=red,draw=none,text=white]
 
-\pic [] { entityassociative = {{witness}
-{\textbf{Witness}}
+\pic [] { entityassociative = {{item}
+{\textbf{Archival Item}}
 {
-  \textbf{id} \\
+  \textbf{ID} \\
   \hline
-  \textbf{text\_id} \\
-  siglum \\
-  status \\
-  tei\_document\\
-  scribe\\
-  scripta\\
-  creation\_date\\
-  is\_preceded\_by\\
-  was\_contained\_in
+  is conserved in\\
+  collection\\
+  shelfmark\\
+  belatedly compiled\\
+  provenance\\
+  digitisation URL\\
+  IIIF manifest\\
 }
 }};
 
-\pic [left = 10em of witness] { entityassociative = {{text}
-{\textbf{Text}}
+\pic [right = 15em of item] { entityassociative = {{repository}
+{\textbf{Repository}}
 {
-  \textbf{id} \\
+  \textbf{ID} \\
   \hline
-  \textbf{work\_id} \\
-  title \\
-  person\_creator \\
-  person\_translator \\
-  date\\
-  matter\\
-  regional\_genre\\
-  language\\
-  form\\
-  rhyme\_type\\
-  verse\_type\\
-  verse\_length
+  institutional name\\
+  street address\\
+  website\\
+  AEP reference\\
+  country\\
+  WikiData ID\\
+  GeoNames ID\\
+  GeoShape Map\\
 }
 }};
 
-\pic [right = 10em of witness] { entityassociative = {{pages}
-{\textbf{Pages}}
-{
-    \textbf{id} \\ \hline
-    \textbf{witness\_id}\\
-    \textbf{archival\_item\_id}\\
-    volume\_number \\
-    document\_subsection \\
-    page\_start
-    page\_end
-    image\_first
-    image\_last
-}
-}};
-
-\draw[one-omany] (text) -- node[label,above]{Witness is instance} (witness);
-\draw[one-omany] (text) -- node[label,below]{of 1 and only 1 Text} (witness);
-
-\draw[one-omany] (witness) --node[label, above]{Witness is contained} (pages);
-\draw[one-omany] (witness) --node[label, below]{on 0 or many Pages} (pages);
-
-
+\draw[omany-one] (item) --node[label, above]{Repository conserves 0, 1,} (repository);
+\draw[omany-one] (item) --node[label, below]{or many Archival Items} (repository);
 
 \end{tikzpicture}

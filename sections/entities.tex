@@ -1,0 +1,362 @@
+\subsection{Cycle}
+
+Definition: General theme that a group of \textit{Works} can share.  
+
+\vspace{1em}
+\noindent Attributes:
+\begin{itemize}
+    \item \texttt{title} (text, req., uniq.): Received name of the \textit{Cycle}, either in the language of the first known \textit{Text} to treat the matter or in the language most used in scholarship.
+    \item \texttt{is part of} (foreign key, \textbf{Cycle}, opt., uniq.): The meta-\textit{Cycle}, of which the \textit{Cycle} is a part.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/cycle.tex}
+    \end{center}
+\label{fig:CycleER}
+\caption{\textit{Cycle} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Work}
+
+Definition: Content of a story, which has a recognizable structure and can be recounted in different ways while remaining the same story.
+
+\vspace{1em}
+\noindent Attributes:
+\begin{itemize}
+    \item \texttt{title} (text, req., uniq.): Received name of the \textit{Work}, either in the language of the first known \textit{Text} to treat the matter or in the language most used in scholarship.
+    \item \texttt{is part of} (foreign key, \textbf{Cycle}, opt., uniq.): The \textit{Cycle}, of which the \textit{Work} is a part.
+    \item \texttt{is modeled on} (foreign key, \textbf{Work}, opt., repeat.): If a reworking of an anterior \textit{Work}, the \textit{Work} on which it is modeled.
+\end{itemize}
+
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/work.tex}
+    \end{center}
+\label{fig:WorkER}
+\caption{\textit{Work} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Text}
+
+Definition: Formulation of a \textit{Work} in human language, whose literary form and style can be detected and whose creation can be attributed to one or more individuals.
+
+\vspace{1em}
+\noindent Attributes:
+\begin{itemize}
+    \item \texttt{is expression of} (foreign key [\textbf{Work}], req., uniq.): The \textit{Work} that the \textit{Text} articulates.
+    \item \texttt{is modeled on} (foreign key, [\textbf{Text}], opt., uniq.): If the \textit{Text} is derived from another \textit{Text}, a reference to the model \textit{Text}.
+    \item \texttt{title} (text, req., uniq.): Either the given title of the \textit{Text}, as provided by the creator, or the standardized title most used in scholarship to refer to the \textit{Text}.
+    \item \texttt{is written by} (foreign key [\textbf{Person}], opt., repeat.): The individual accredited with composing the \textit{Text}.
+    \item \texttt{is translated by} (foreign key [\textbf{Person}], opt., repeat.): When the \textit{Text} is a translation of another \textit{Text}, the individual accredited with creating the translation.
+    \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Text's} creation, and, in the case of a range, the second date is the latest date associated with the creation.
+    \item \texttt{creation date text} (text, opt., uniq.): The date associated with the \textit{Text's} creation as it is written in a scholarly source.
+    \item \texttt{creation date cite} (text, opt., uniq.): A citation of the source that provided the date of creation.
+    \item \texttt{matter} (terms, opt., repeat.): The matter treated in the \textit{Text}, as defined by Jean Bodel.
+    \begin{itemize}
+        \item \texttt{Britain}: Matter of Britain, which includes stories about Tristan and King Arthur.
+        \item \texttt{France}: Matter of France, which includes stories about Charlemagne.
+        \item \texttt{Rome}: Matter of Rome, which includes stories about Troy, Rome, Alexander, and antiquity.
+    \end{itemize}
+    \item \texttt{regional genre} (terms, req., uniq.): Literary genre attributed to the \textit{Text}.
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item Relevant to French tradition
+                \begin{itemize}
+                    \item \texttt{chanson de geste}
+                    \item \texttt{roman}
+                    \item \brackettext{needs development}
+                \end{itemize}
+            \item Relevant to Iberian tradition
+            \begin{itemize}
+                \item \texttt{romancero}
+                \item \texttt{novela}
+                \item \brackettext{needs development}
+            \end{itemize}
+            \item Relevant to Italian tradition
+            \begin{itemize}
+                \item \href{https://www.oxfordbibliographies.com/display/document/obo-9780195396584/obo-9780195396584-0199.xml}{\texttt{cantare}}
+                \item \texttt{poema cavalleresche}
+                \item \brackettext{needs development}
+            \end{itemize}
+            \item Relevant to Islandic tradition
+                \begin{itemize}
+                    \item \texttt{fornaldarsögur}
+                    \item \texttt{riddarasögur}
+                    \item \texttt{rímur}
+                    \item \texttt{fornaldarrímur}
+                    \item \texttt{riddararímur}
+                    \item \brackettext{needs development}
+                \end{itemize}
+            \item Relevant to Middle Dutch tradition
+                \begin{itemize}
+                    \item \texttt{ridderepiek}
+                    \item \texttt{ridderroman}
+                    \item \texttt{rijmkronieken}
+                    \item \brackettext{needs development}
+                \end{itemize}
+            \item Relevant to Middle English, Middle Irish, Middle Welsh traditions
+            \begin{itemize}
+                \item \texttt{romance}
+                \item \brackettext{needs development}
+            \end{itemize}
+            \item Relevant to Middle High German tradition
+            \begin{itemize}
+                \item \brackettext{needs development}
+            \end{itemize}
+        \end{itemize}
+    \end{multicols}
+    \item \texttt{language} (terms, req., uniq.): ISO code of the primary language through which the \textit{Text} expresses the \textit{Work}.
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item \texttt{cat}: Catalan
+            \item \texttt{dum}: Middle Dutch
+            \item \texttt{enm}: Middle English (1100-1500)
+            \item \texttt{frm}: Middle French (ca. 1400-1600)
+            \item \texttt{fro}: Old French (842-ca. 1400)
+            \item \href{https://www.wikidata.org/wiki/Q54879035}{\texttt{fro\_ITA}}: Franco-Italian
+            \item \texttt{fro\_PRO}: Franco-Occitan
+            \item \texttt{ghg}: Hiberno-Scottish Gaelic, Early Modern Irish
+            \item \texttt{glg}: Galician
+            \item \href{https://www.wikidata.org/wiki/Q1072111}{\texttt{glg\_POR}}: Galician-Portugese
+            \item \texttt{gmh}: Middle High German (ca. 1050-1500)
+            \item \texttt{gml}: Middle Low German
+            \item \texttt{isl}: Islandic
+            \item \texttt{ita}: Italian
+            \item \texttt{mga}: Middle Irish (900-1200)
+            \item \texttt{non}: Old Norse
+            \item \href{https://www.wikidata.org/wiki/Q12330003}{\texttt{non\_DAN}}: Old East Norse, Old Danish (800-1100)
+            \item \href{https://www.wikidata.org/wiki/Q2417210}{\texttt{non\_SWE}}: Old Swedish (800-1500)
+            \item \texttt{oco}: Old Cornish
+            \item \texttt{por}: Portugese
+            \item \texttt{pro}: Old Occitan, Old Provençal (to 1500)
+            \item \texttt{spa}: Spanish or Castilian
+            \item \texttt{wlm}: Middle Welsh
+            \item \href{https://data.biblissima.fr/w/Item:Q286307}{\texttt{xno}}: Anglo-French, Anglo-Norman
+        \end{itemize}
+    \end{multicols}
+    \item \texttt{form} (terms, req., uniq.): Whether the \textit{Text} is formed in prose, verse, or a mix of both.
+    \begin{multicols}{4}
+        \begin{itemize}
+            \item \texttt{prose}
+            \item \texttt{verse}
+            \item \texttt{mixed}
+        \end{itemize}
+    \end{multicols}
+    \item \texttt{poetic meter} (terms, opt., uniq.): If the \textit{Text} is in verse, the type of poetic meter.
+        \begin{itemize}
+            \item \texttt{French alexandrine}: line consisting of 2 half-lines each of 6 syllables, total of 12 syllables.
+            \item \texttt{dodecasyllabe}: line consisting of 12 syllables.
+            \item \texttt{decasyllabe}: line consisting of 10 syllables.
+            \item \texttt{octosyllabe}: line consisting of 8 syllables.
+            \item \texttt{hexasyllabe}: line consisting of 6 syllables.
+            \item \texttt{pentasyllabe}: line consisting of 5 syllables.
+        \end{itemize}
+    \item \texttt{rhyme type} (terms, opt., repeat.): If the \textit{Text} is in verse, the types of rhyme used.
+        \begin{itemize}
+            \item \texttt{alliteration}: Rhyme is allowed between words that either start with the same consonant sound or with the same vowel, such as ``\textit{With floures fele, fair under fete}'' in Middle English.\footcite[][396]{Davis2002}
+            \item \texttt{assonance}: Rhyme is allowed between words that have a repeated vowel sound, such as ``a'' in ``\textit{Vio puertas abiertas e uços sin cañados / alcandaras vazias sin pielles e sin mantos}'' in Castilian.\footcite[][364]{Gornall1995}
+            \item \texttt{end-rhyme}: Rhyme is allowed between words that have an ending that sounds the same, such as ``\textit{ihesu guz son ihesu goþe / bløt mit hiærta mæþ þino bloþe}'' in Old Norse.\footcite[][423]{Layher2008}
+            \item \texttt{generic}: ``[R]hyme is allowed between any one member of a phonetic group and is itself or any other member of the same group,'' such as `b,' `g,' `d' in Old Irish.\footcite[][822]{McKie1997}
+        \end{itemize}
+    \item \texttt{strophe count} (integer, opt., uniq.): If the \textit{Text} is in verse and strophic, the number of strophes.
+    \item \texttt{strophe length} (integer, opt., uniq.): If the \textit{Text} is in verse and strophic, the number of lines in each strophe.
+    \item \texttt{verse length} (integer, opt., uniq.): If the \textit{Text} is in verse, the number of verses a complete version (\textit{Witness}) of it should have.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/text.tex}
+    \end{center}
+\label{fig:TextER}
+\caption{\textit{Text} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Person}
+
+Definition: An individual bearing some responsibility for a \textit{Text} in the data set, either as a creator/author or as a translator, in the case of a \textit{Text} that is the translation of a model \textit{Text} in another language.
+
+\vspace{1em}
+\noindent Attributes:
+\begin{itemize}
+    \item \texttt{name} (text, req., uniq.): The recieved name of the individual.
+    \item \texttt{note} (text, opt., uniq.): Optional notes to help identify the individual.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/person.tex}
+    \end{center}
+\label{fig:PersonER}
+\caption{\textit{Person} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Witness}
+
+Definition: An extant manifestation of a \textit{Text} in a defined sequence of characters, which have been inscribed on a physical document.
+
+\vspace{1em}
+\noindent Attributes:
+\begin{itemize}
+    \item \texttt{is manifestation of} (foreign key [\textbf{Text}], req., uniq.): The \textit{Text} whose linguistic content the \textit{Witness} manifests in writing.
+    \item \texttt{is preceded by} (foreign key [\textbf{Witness}], opt., uniq.): If the \textit{Witness} is a fragment, reference to another \textit{Witness} fragment, with which the \textit{Witness} is thought to have been produced in an original document, and which presents an earlier part of the \textit{Text} than its own part.
+    \item \texttt{is visible on} (foreign key [\textbf{Pages}], opt., repeat.): 
+    \item \texttt{was contained in} (foreign key [\textbf{Attested Document}], opt., uniq.): 
+    \item \texttt{siglum} (text, opt., repeat.): Identifier used by scholars to indicate the extant \textit{Witness} within the \textit{Text's} tradition.
+    \item \texttt{status} (terms, req., uniq.): Status of the extant \textit{Witness}.
+    \begin{itemize}
+        \item \texttt{complete}: All pages containing the main textual content of the \textit{Witness}, excluding dedications and decorations, have survived.
+        \item \texttt{mutilated}: The \textit{Witness} presents parts of its \textit{Text} on a set of surviving pages ($ \geq 3 $ pages).
+        \item \texttt{fragment}: Only a few pages of the \textit{Witness} survive ($ \leq 2 $ pages). 
+        \item \texttt{citation}: The \textit{Witness} testifies to the existence of a \textit{Text}, through citation, but does not present all of the latter's linguistic content.
+    \end{itemize}
+    \item \texttt{TEI document} (text, opt., uniq.): Reference to a TEI-XML file representing the text content of the \textit{Witness}.
+    \item \texttt{IIIF manifest} (text, opt., uniq.): Reference to a IIIF manifest JSON file representing the digitized images of the \textit{Witness's} \textit{Pages}.
+    \item \texttt{scribe} (text, opt., uniq.): When known, identifying information about the scribe alleged to have written the text version.
+    \item \texttt{scripta} (terms, opt., uniq.): When known, the name of a regional writing style, similar to the written version of a spoken dialect, as defined by Louis Remacle.\footcite[``Je désigne la langue vulgaire écrite au moyen âge par le néologisme \textit{scripta}. L'expression `la scripta' est synonyme de l'allemand `die Schriftsprache.'''][24]{Remacle1948}
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item \texttt{bourg.}: Bourguignon
+            \item \texttt{champ. mérid.}: Champenois méridional
+            \item \texttt{champ. setp.}: Champenois septentrional
+            \item \texttt{frc.}: francien (Paris)
+            \item \texttt{lorr.}: Lorrain
+            \item \texttt{lorr. mérid.}: Lorrain méridional
+            \item \texttt{lorr. sept.}: Lorrain septentrional (Metz)
+            \item \texttt{norm.}: Normand
+            \item \texttt{orl.}: Orléanais
+            \item \texttt{ouest}: Ouest
+            \item \texttt{pic.}: Picard
+            \item \texttt{pic. sept.}: Picard septentrional (Flandres)
+            \item \texttt{pic. mérid.}: Picard méridional (Soissonnais)
+            \item \texttt{wall.}: Wallon
+            \item \texttt{liég.}: Liégeois
+        \end{itemize}
+    \end{multicols}
+    \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Witness's} production, and, in the case of a range, the second date is the latest date associated with the production.
+    \item \texttt{creation date text} (text, opt., uniq.): The date associated with the \textit{Witness's} production as it is written in a catalogue or other scholarly source.
+    \item \texttt{note} (text, opt., uniq.): Notes about the \textit{Witness} that will not be standardized and used in computational methods but may serve to protect the integrity of the record.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/witness.tex}
+    \end{center}
+\label{fig:WitnessER}
+\caption{\textit{Witness} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Attested Document}
+
+Definition: Hypothetical text object, conceived of and produced as one unit, in which \textit{Witness} were transmitted; it no longer exists today.
+
+\vspace{1em}
+\noindent Attributes:
+
+\begin{itemize}
+    \item \texttt{name} (text, req., uniq.): Name given to the \textit{Attested Witness} used to help identify it.
+    \item \texttt{creation date} (list[date], opt., uniq.): A list of two or one dates; the first date is either the earliest or the only date associated with the \textit{Attested Witness's} production, and, in the case of a range, the second date is the latest date associated with the production.
+    \item \texttt{creation date text} (text, opt., uniq.): The date associated with the \textit{Attested Witness's} production as it is written in a catalogue or other scholarly source.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/attestedDocument.tex}
+    \end{center}
+\label{fig:AttestedDocumentER}
+\caption{\textit{Attested Document} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Pages}
+
+Definition: An uninterrupted series of leafs or pages in an \textit{Archival Item} on which is inscribed the \textit{Witness} of a \textit{Text}.
+
+\vspace{1em}
+\noindent Attributes:
+\begin{itemize}
+    \item \texttt{is contained in} (foreign key [\textbf{Archival Item}], req., uniq.): The physical archival item in which the pages are currently bound or otherwise stored.
+    \item \texttt{archival item part} (text, opt., uniq.): If the item's archival description and/or catalogue entry has subdivided the item into parts (i.e. Part II), the part containing the \textit{Pages}; this information is used to enrich bibliographic references.
+    \item \texttt{witness part} (integer, opt., uniq.): If the \textit{Witness} is composed of discrete parts (i.e. multiple volumes), the \textit{Pages}' order in the sequence; this information is used to correctly order multiple \textit{Pages} entities descending from a \textit{Witness}.
+    \item \texttt{folio start} (text, req., uniq.): The folio number inscribed on the first page.
+    \item \texttt{folio end} (text, req., uniq.): The folio number inscribed on the last page.
+    \item \texttt{image start} (integer, opt., uniq.): If the pages are digitized, the number of the first digital image.
+    \item \texttt{image end} (integer, opt., uniq.): If the pages are digitized, the number of the last digital image.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/pages.tex}
+    \end{center}
+\label{fig:PagesER}
+\caption{\textit{Pages} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Archival Item}
+
+Definition: An extant physical document conserved in an archival institution.
+
+\vspace{1em}
+\noindent Attributes:
+
+\begin{itemize}
+    \item \texttt{is conserved in} (foreign key [\textbf{Repository}], req., uniq.): The archival institution that currently holds the item.
+    \item \texttt{collection} (text, opt., uniq.): The name of a collection in the archival institution.
+    \item \texttt{shelfmark} (text, req., uniq.): The shelfmark of the item in the archival institution.
+    \item \texttt{belatedly compiled} (boolean, req., uniq.): Whether the item is a collection of manuscripts that pre-date the item's production and were extracted from their original contexts, belatedly compiled together (i.e 19th-century collection of Medieval fragments).
+    \item \texttt{provenance} (text, opt., uniq.): Notes about the provenance of the \textit{Archival Item}.
+    \item \texttt{digitisation URL} (text, opt., uniq.): If digitized, the URL to the digital document.
+    \item \texttt{IIIF manifest} (text, opt., uniq.): If a IIIF manifest is available of the digitized document, a link to the manifest's JSON.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/archivalItem.tex}
+    \end{center}
+\label{fig:ArchivalER}
+\caption{\textit{Archival Item} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Repository}
+
+Definition: An archival institution.
+
+\vspace{1em}
+\noindent Attributes:
+
+\begin{itemize}
+    \item \texttt{institutional name} (text, req., uniq.): The full, official name of the archival institution in the original language.
+    \item \texttt{street address} (text, opt., uniq.): The institution's principal address, which could be used to localize it.
+    \item \texttt{website} (text, opt., uniq.): A link to the homepage of the institution's website.
+    \item \texttt{AEP reference} \brackettext{\texttt{Archives Portal Europe reference}} (text, opt., uniq.): URL to the archival institution's information on the Archives Portal Europe website.
+    \item \texttt{country} (terms, opt., uniq.): Country in which the institution is located.
+    \item \texttt{WikiData ID} (text, opt., uniq.): WikiData ID of the country in which the institution is located.
+    \item \texttt{GeoNames ID} (integer, opt., uniq.): GeoNames ID of the country in which the institution is located.
+    \item \texttt{GeoShape Map} (text, opt., uniq.): Link to a GeoShape map on Wikimedia.
+\end{itemize}
+
+\begin{figure}[ht]
+    \begin{center}
+        \input{sections/entities/repository.tex}
+    \end{center}
+\label{fig:RepositoryER}
+\caption{\textit{Repository} entity relationships.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%

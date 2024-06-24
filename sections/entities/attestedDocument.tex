@@ -6,60 +6,37 @@
 \pic [] { entityassociative = {{witness}
 {\textbf{Witness}}
 {
-  \textbf{id} \\
+  \textbf{ID} \\
   \hline
-  \textbf{text\_id} \\
+  is manifestation of\\
+  is preceded by\\
+  is visible on\\
+  was contained in\\
   siglum \\
   status \\
-  tei\_document\\
+  TEI document\\
+  IIIF manifest\\
   scribe\\
   scripta\\
-  creation\_date\\
-  is\_preceded\_by\\
-  was\_contained\_in
+  creation date\\
+  creation date text\\
+  note\\
 }
 }};
 
-\pic [left = 10em of witness] { entityassociative = {{text}
-{\textbf{Text}}
+\pic [right = 15em of witness] { entityassociative = {{doc}
+{\textbf{Attested Document}}
 {
-  \textbf{id} \\
+  \textbf{ID} \\
   \hline
-  \textbf{work\_id} \\
-  title \\
-  person\_creator \\
-  person\_translator \\
-  date\\
-  matter\\
-  regional\_genre\\
-  language\\
-  form\\
-  rhyme\_type\\
-  verse\_type\\
-  verse\_length
+  name\\
+  creation date\\
+  creation date text\\
 }
 }};
 
-\pic [right = 10em of witness] { entityassociative = {{pages}
-{\textbf{Pages}}
-{
-    \textbf{id} \\ \hline
-    \textbf{witness\_id}\\
-    \textbf{archival\_item\_id}\\
-    volume\_number \\
-    document\_subsection \\
-    page\_start
-    page\_end
-    image\_first
-    image\_last
-}
-}};
-
-\draw[one-omany] (text) -- node[label,above]{Witness is instance} (witness);
-\draw[one-omany] (text) -- node[label,below]{of 1 and only 1 Text} (witness);
-
-\draw[one-omany] (witness) --node[label, above]{Witness is contained} (pages);
-\draw[one-omany] (witness) --node[label, below]{on 0 or many Pages} (pages);
+\draw[one-omany] (witness) --node[label, above]{Attested Document contained} (doc);
+\draw[one-omany] (witness) --node[label, below]{1 or more Witnesses} (doc);
 
 
 

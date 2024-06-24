@@ -9,7 +9,7 @@
     \textbf{ID} \\ \hline
     is contained in \\
     archival item part \\
-    witness part no \\
+    witness part \\
     folio start \\
     folio end \\
     image start \\
@@ -46,6 +46,7 @@
   is conserved in\\
   collection\\
   shelfmark\\
+  belatedly compiled\\
   provenance\\
   digitisation URL\\
   IIIF manifest\\
@@ -55,7 +56,7 @@
 \draw[one-omany] (witness) --node[label, above]{Pages makes visible} (pages);
 \draw[one-omany] (witness) --node[label, below]{1 and only 1 Witness} (pages);
 
-\draw[one-many] (pages) --node[label, above]{Pages are contained in 1} (item);
-\draw[one-many] (pages) --node[label, below]{and only 1 Archival Item} (item);
+\draw[omany-one] (pages) --node[label, above]{Pages are contained in 1} (item);
+\draw[omany-one] (pages) --node[label, below]{and only 1 Archival Item} (item);
 
 \end{tikzpicture}

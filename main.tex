@@ -26,6 +26,8 @@
 \pgfdeclarelayer{bg}    % declare background layer
 \pgfsetlayers{bg,main}
 
+\usepackage[section]{placeins}
+
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
 
@@ -105,53 +107,7 @@ The model needs to be able to execute the following user tasks:
 \section{Our Model}
 \input{sections/our-model.tex}
 
-% \subsubsection{Relational Database Framework}
-% \input{sections/intro/er-diagram.tex}
-
-% \section{Entities}
-
-% \subsection{Repository}
-% \input{sections/repository.tex}
-
-% \subsection{Historical Document}
-% \input{sections/historical_document.tex}
-
-% \subsection{Pages}
-% \input{sections/pages.tex}
-
-% \subsection{Witness}
-% \input{sections/witness.tex}
-
-% \subsection{Text}
-% \input{sections/text.tex}
-
-% \section{Added}
-
-% \begin{longtable}{|
-%     |m{0.15\textwidth}
-%     |m{0.05\textwidth}
-%     |m{0.1\textwidth}
-%     |m{0.1\textwidth}
-%     |m{0.2\textwidth}
-%     |m{0.3\textwidth}
-% ||}
-%     \hline
-%     Attribute Name & Count & Data Type & Vocab. & Description & Semantic Reference \\
-%     \hline
-
-%     \multicolumn{6}{|c|}{Relations}\\
-%     \hline
-%     \textbf{note\_id} %Field
-%         & \[\geq 0\] %N
-%         & %Type
-%         & %Vocab
-%         & %Description
-%         & %Semantic Reference
-%         \\
-%     \hline
-
-% \caption{Proposed Attributes} % needs to go inside longtable environment
-% \label{tab:proposedAttributes}
-% \end{longtable}
+\section{Entities and Attributes}
+\input{sections/entities.tex}
 
 \end{document}
