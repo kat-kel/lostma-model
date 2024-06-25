@@ -70,12 +70,15 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
                 \begin{itemize}
                     \item \texttt{chanson de geste}
                     \item \texttt{roman}
-                    \item \brackettext{needs development}
+                    %\item \brackettext{needs development}
                 \end{itemize}
             \item Relevant to Iberian tradition
             \begin{itemize}
                 \item \texttt{romancero}
                 \item \texttt{novela}
+                \item \texttt{cantar de gesta}
+                \item \texttt{mester de juglaria}
+                \item \texttt{mester de clerecia}
                 \item \brackettext{needs development}
             \end{itemize}
             \item Relevant to Italian tradition
@@ -86,10 +89,10 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
             \end{itemize}
             \item Relevant to Islandic tradition
                 \begin{itemize}
-                    \item \texttt{fornaldarsögur}
+                    %\item \texttt{fornaldarsögur}
                     \item \texttt{riddarasögur}
-                    \item \texttt{rímur}
-                    \item \texttt{fornaldarrímur}
+                    %\item \texttt{rímur}
+                    %\item \texttt{fornaldarrímur}
                     \item \texttt{riddararímur}
                     \item \brackettext{needs development}
                 \end{itemize}
@@ -107,6 +110,7 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
             \end{itemize}
             \item Relevant to Middle High German tradition
             \begin{itemize}
+             \item \texttt{Roman}
                 \item \brackettext{needs development}
             \end{itemize}
         \end{itemize}
@@ -119,6 +123,7 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
             \item \texttt{enm}: Middle English (1100-1500)
             \item \texttt{frm}: Middle French (ca. 1400-1600)
             \item \texttt{fro}: Old French (842-ca. 1400)
+            \item \texttt{fro\_ENG}: Anglo-French
             \item \href{https://www.wikidata.org/wiki/Q54879035}{\texttt{fro\_ITA}}: Franco-Italian
             \item \texttt{fro\_PRO}: Franco-Occitan
             \item \texttt{ghg}: Hiberno-Scottish Gaelic, Early Modern Irish
@@ -137,7 +142,6 @@ Definition: Formulation of a \textit{Work} in human language, whose literary for
             \item \texttt{pro}: Old Occitan, Old Provençal (to 1500)
             \item \texttt{spa}: Spanish or Castilian
             \item \texttt{wlm}: Middle Welsh
-            \item \href{https://data.biblissima.fr/w/Item:Q286307}{\texttt{xno}}: Anglo-French, Anglo-Norman
         \end{itemize}
     \end{multicols}
     \item \texttt{form} (terms, req., uniq.): Whether the \textit{Text} is formed in prose, verse, or a mix of both.
@@ -208,7 +212,8 @@ Definition: An extant manifestation of a \textit{Text} in a defined sequence of 
 \noindent Attributes:
 \begin{itemize}
     \item \texttt{is manifestation of} (foreign key [\textbf{Text}], req., uniq.): The \textit{Text} whose linguistic content the \textit{Witness} manifests in writing.
-    \item \texttt{is preceded by} (foreign key [\textbf{Witness}], opt., uniq.): If the \textit{Witness} is a fragment, reference to another \textit{Witness} fragment, with which the \textit{Witness} is thought to have been produced in an original document, and which presents an earlier part of the \textit{Text} than its own part.
+    \item \texttt{is preceded by fragm.} (foreign key [\textbf{Witness}], opt., uniq.): If the \textit{Witness} is a fragment, a reference to another \textit{Witness} fragment, with which the \textit{Witness} is thought to have been produced in an original document (\textit{Attested Document}), and which presents an earlier part of the \textit{Text} than its own part.
+    \item \texttt{is preceded by wit.} (foreign key [\textbf{Witness}], opt., uniq.): If the \textit{Witness} was contained in an \textit{Attested Document} and is not preceded by another fragment of its same \textit{Text}, a reference to the \textit{Witness} or to the root of a sequence of fragmented \textit{Witnesses} that used to precede it in the \textit{Attested Document}.
     \item \texttt{is visible on} (foreign key [\textbf{Pages}], opt., repeat.): 
     \item \texttt{was contained in} (foreign key [\textbf{Attested Document}], opt., uniq.): 
     \item \texttt{siglum} (text, opt., repeat.): Identifier used by scholars to indicate the extant \textit{Witness} within the \textit{Text's} tradition.
@@ -221,7 +226,7 @@ Definition: An extant manifestation of a \textit{Text} in a defined sequence of 
     \end{itemize}
     \item \texttt{TEI document} (text, opt., uniq.): Reference to a TEI-XML file representing the text content of the \textit{Witness}.
     \item \texttt{IIIF manifest} (text, opt., uniq.): Reference to a IIIF manifest JSON file representing the digitized images of the \textit{Witness's} \textit{Pages}.
-    \item \texttt{scribe} (text, opt., uniq.): When known, identifying information about the scribe alleged to have written the text version.
+    \item \texttt{scribe} (text, opt., repeat.): When known, identifying information about the scribe alleged to have written the text version.
     \item \texttt{scripta} (terms, opt., uniq.): When known, the name of a regional writing style, similar to the written version of a spoken dialect, as defined by Louis Remacle.\footcite[``Je désigne la langue vulgaire écrite au moyen âge par le néologisme \textit{scripta}. L'expression `la scripta' est synonyme de l'allemand `die Schriftsprache.'''][24]{Remacle1948}
     \begin{multicols}{2}
         \begin{itemize}

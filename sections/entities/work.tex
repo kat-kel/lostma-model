@@ -64,8 +64,8 @@
 
 \draw[omany-omany] (reference) -- node[label, left, pos=0.5]{Work has 0, 1, or many References} (work);
 
-\draw[one-omany] (cycle.east) -- node[label, above]{Work is part of} (work.west);
-\draw[one-omany] (cycle.east) -- node[label, below]{1 and only 1 Cycle} (work.west);
+\draw[oone-omany] (cycle.east) -- node[label, above]{Work is part of} (work.west);
+\draw[oone-omany] (cycle.east) -- node[label, below]{0 or 1 Cycle} (work.west);
 
 \draw[one-many] (work.east) -- node[label, above]{Work has 1 or more} (text.west);
 \draw[one-many] (work.east) -- node[label, below]{Text expressions} (text.west);
